@@ -9,7 +9,7 @@
 
 get_header(); 
 
-// $categories = get_the_terms( $post->ID, 'sedoo-type-document');  
+$categories = get_the_terms( $post->ID, 'sedoo-type-document');  
 
 while ( have_posts() ) : the_post();
 
@@ -22,34 +22,45 @@ while ( have_posts() ) : the_post();
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 									
 				<header>
-				<?php $logo = get_field( 'logo' ); ?>
-					<?php if ( $logo ) { ?>
-					<figure>
-					
-						<img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" />
-					
-					</figure>
-					<?php } ?>
-					
-					<?php //sedoo_docmanager_show_categories($categories);?>
+			        <?php sedoo_docmanager_show_categories($categories);?>
 				</header>
 			
             	<section class="wrapper-content">
 
-					<?php $members = get_field( 'members' ); ?>
-					<?php if ( $members ): ?>
-					<ul>
-						<?php foreach ( $members as $post ):  ?>
-							<?php setup_postdata ($post); ?>
-							<li>
-								<a href="<?php the_permalink(); ?>"><?php the_title(); ?> <?php the_field( 'prenom' ); ?></a>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-					<?php wp_reset_postdata(); ?>
-					<?php endif; ?>
+					<?php 
+						the_content();
+					?>
 		        </section>
-				
+				<?php
+				if ( ! post_password_required() ) {
+				?>
+				<section class="wrapper-content">
+					<h2>Files</h2>
+					<?php
+						if( have_rows('fichiers') ): ?>
+					
+						<?php while( have_rows('fichiers') ): the_row(); 
+					
+							$file = get_sub_field('fichier');
+							?>
+							<article class="fileList" style="display:flex;align-items:center;padding:0 10px;">
+								<figure style="width:25px;margin-right:10px;">
+									<img src="<?php echo $file['icon']; ?>"> 
+								</figure>
+								<h4>
+									<a href="<?php echo $file['url']; ?>"><?php echo $file['title']; ?></a><br>
+									<small><?php echo $file['filename']; ?></small>
+								</h4>
+							</article>
+					
+						<?php endwhile; ?>
+					
+										
+					<?php endif; ?>
+				</section>
+				<?php
+				}
+				?>
 
 				<footer>
 					<span class="icon-user"></span><?php the_author();?>
