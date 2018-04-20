@@ -4,7 +4,7 @@
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 * Description: Plugin pour gérer les membres et les équipes
 * Author: Pierre VERT
-* Version: 0.1.0
+* Version: 0.2.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
 * GitHub Branch:     master
 */
@@ -35,13 +35,61 @@ function aeris_team_manager_plugin_init(){
 
     } else {
     // Le plugin est activé 
-    
-    // FLUSH REWRITE RULE !!! SEULEMENT à L'ACTIVATION/DESACTIVATION DU PLUGIN
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+    /**
+     * FLUSH REWRITE RULE
+     * 
+     * !!! WARNING !!! SEULEMENT à L'ACTIVATION/DESACTIVATION DU PLUGIN !!!
+     * 
+     * source : https://codex.wordpress.org/Function_Reference/flush_rewrite_rules
+     */
 
+        register_deactivation_hook( __FILE__, 'flush_rewrite_rules' );
+        register_activation_hook( __FILE__, 'aeris_team_manager_flush_rewrites' );
+        function aeris_team_manager_flush_rewrites() {
+        // call your CPT registration function here (it should also be hooked into 'init')
+        aeris_team_manager_cpt();
+        flush_rewrite_rules();
+        }   
 
-    require_once 'inc/acf-config.php';
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+        // LOAD ACF CONFIG FILE & custom functions for ACF
+        require_once 'inc/acf-config.php';
+
+        // LOAD CSS & SCRIPTS
+        function aeris_team_manager_scripts() {
+            wp_register_style( 'prefix-style', plugins_url('css/aeris-team-manager.css', __FILE__) );
+            wp_enqueue_style( 'prefix-style' );
+        }
+        add_action('wp_enqueue_scripts','aeris_team_manager_scripts');
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+        /**
+         * CREATE CUSTOM MENU
+         * 
+         * source : http://imtiazrayhan.com/multiple-custom-post-types-menu-section/
+         */
+        /*
+        * Adding a menu to contain the custom post types for frontpage
+        */
+
+        function aeris_team_manager_admin_menu() {
+        
+            add_menu_page(
+                'Teams manager',
+                'Teams manager',
+                'read',
+                'aeris_team_manager_admin_menu',
+                '',
+                'dashicons-groups',
+                20
+            );        
+        }        
+        add_action( 'admin_menu', 'aeris_team_manager_admin_menu' );
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
         /** 
-        * Création du custom post type (cpt)
+        * Création des custom post type (cpt)
         */
         add_action('init', 'aeris_team_manager_cpt');
         function aeris_team_manager_cpt() {
@@ -54,7 +102,7 @@ function aeris_team_manager_plugin_init(){
                     'labels' => array(    			
                         'name' => 'Equipes',
                         'singular-name' => 'équipe',
-                        'all_items' => 'Toutes les équipes',
+                        'all_items' => 'Gérer les équipes',
                         'add_new_item' => 'Ajouter une équipe',
                         'edit_item' => 'Editer l\'équipe',
                         'new_item' => 'Nouveau équipe',
@@ -65,15 +113,18 @@ function aeris_team_manager_plugin_init(){
                     ),
                     'public' => true, 				
                     'show_in_rest' => true,         
-                    'capability_type' => 'post',	
+                    'capability_type' => 'post',
+                    // Show in this admin menu
+                    'show_in_menu' => 'aeris_team_manager_admin_menu',
+                    // rewrite URL 
+                    'rewrite' => array( 'slug' => 'teams' ),	
                     'supports' => array(			
                         'title',
-                        // 'author',
                         'editor'	
                     ),
                     'has_archive' => true, 
                     // Url vers une icone ou à choisir parmi celles de WP : https://developer.wordpress.org/resource/dashicons/.
-                    'menu_icon'   => 'dashicons-networking',
+                    'menu_icon'   => 'dashicons-groups',
                 ) 
             );
 
@@ -85,7 +136,7 @@ function aeris_team_manager_plugin_init(){
                     'labels' => array(    			
                         'name' => 'Membres',
                         'singular-name' => 'membre',
-                        'all_items' => 'Tous les membres',
+                        'all_items' => 'Gérer les membres',
                         'add_new_item' => 'Ajouter un membre',
                         'edit_item' => 'Editer le membre',
                         'new_item' => 'Nouveau membre',
@@ -97,11 +148,16 @@ function aeris_team_manager_plugin_init(){
                     'public' => true, 				
                     'show_in_rest' => true,         
                     'capability_type' => 'post',	
-                    'supports' => array(			
-                        'title',
+                    // Show in this admin menu
+                    'show_in_menu' => 'aeris_team_manager_admin_menu',
+                    // rewrite URL 
+                    'rewrite' => array( 'slug' => 'members' ),
+                    // 'supports' => array(			
+                        // 'title',
                         // 'author',
-                        'editor'	
-                    ),
+                        // 'editor'	
+                    // ),
+                    'supports' => false,
                     'has_archive' => true, 
                     // Url vers une icone ou à choisir parmi celles de WP : https://developer.wordpress.org/resource/dashicons/.
                     'menu_icon'   => 'dashicons-admin-users',
@@ -109,48 +165,9 @@ function aeris_team_manager_plugin_init(){
             );
         }
 
-        /******************************************************************
-        * CUSTOM TAXONOMIES 
-        */
-
-        //add_action('init', 'aeris_team_manager_taxonomies');
-        function aeris_team_manager_taxonomies()
-        {
-            
-            /*** 
-            *  TAXONOMIE Equipe
-            */
-            
-            $labels_type = array(
-                'name' => 'Equipes',
-                'singular_name' => 'Equipe',
-                'all_items' => 'Toutes les Equipes',
-                'edit_item' => 'Éditer l\'équipe',
-                'view_item' => 'Voir l\'équipe',
-                'update_item' => 'Mettre à jour l\'équipe',
-                'add_new_item' => 'Ajouter une équipe',
-                'new_item_name' => 'Nouveau équipe',
-                'search_items' => 'Rechercher parmi les Equipes',
-                'popular_items' => 'Equipes les plus utilisées',
-            );
-            
-            $args_type = array (
-                'label' => 'équipe',
-                'labels' => $labels_type,
-                'hierarchical' => true,
-        //        'show_admin_column' => false,
-        //        'show_in_nav_menus' => false,
-        //        'show_tagcloud' => false,
-                'show_ui' => true
-            );
-
-            register_taxonomy('aeris-team', array('aeris-member'), $args_type);
-
-            // register_taxonomy_for_object_type( 'aeris-team', 'document' );
-        }
-
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
         /*
-        * REGISTER TPL SINGLE MEMBER
+        * REGISTER TPL SINGLE TEAM
         */
         add_filter ( 'single_template', 'aeris_team_manager_single' );
         function aeris_team_manager_single($single_template) {
@@ -176,9 +193,10 @@ function aeris_team_manager_plugin_init(){
         }
         
 
-    
+//---------------------------------------------------------------------------------------------------------------------------------------------------------    
     } // end test plugin ACF
 
 }
 add_action('plugins_loaded', 'aeris_team_manager_plugin_init');
+
 ?>
