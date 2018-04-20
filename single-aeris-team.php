@@ -16,7 +16,7 @@ while ( have_posts() ) : the_post();
 	get_template_part( 'template-parts/header-content', 'page' );
 ?>
 
-	<div id="content-area" class="wrapper sidebar">
+	<div id="content-area" class="fullwidth">
 		<main id="main" class="site-main" role="main">
 		
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -36,55 +36,52 @@ while ( have_posts() ) : the_post();
 			
             	<section class="wrapper-content">
 
-					<?php $members = get_field( 'members' ); ?>
+					<?php $members = get_field( 'aeris_team_manager_bidirectionnal_relation' ); ?>
 					<?php if ( $members ): ?>
-					<ul>
+					<section class="aeris_team_manager_listMembers">
 						<?php foreach ( $members as $post ):  ?>
 							<?php setup_postdata ($post); ?>
-							<li>
-								<a href="<?php the_permalink(); ?>"><?php the_title(); ?> <?php the_field( 'prenom' ); ?></a>
-							</li>
+							<article class="aeris_team_manager_embedMembers">
+								
+								<?php 
+								// Include photo
+								$image = get_field( 'photo' ); 
+								$size = "medium";
+								if ( $image ) { 
+									?>
+									<figure>
+									<?php echo wp_get_attachment_image( $image, $size );?>
+									</figure>
+								<?php	
+								} 
+								?>
+								<section>
+									<h3>
+										<a href="<?php the_permalink(); ?>"><?php the_field( 'lastname' ); ?> <?php the_field( 'firstname' ); ?></a>
+									</h3>
+									<p>
+									<?php the_field( 'fonction' ); ?>
+									</p>
+									<p>
+										Tel : <?php the_field( 'tel' ); ?><br>
+										Mail : <?php the_field( 'mail' ); ?>
+									</p>
+								</section>
+							</article>
 						<?php endforeach; ?>
-					</ul>
+					</section>
 					<?php wp_reset_postdata(); ?>
 					<?php endif; ?>
 		        </section>
 				
 
 				<footer>
-					<span class="icon-user"></span><?php the_author();?>
-					<span class="icon-clock"></span><?php the_time( get_option( 'date_format' ) );?>
-					<?php 
-					// if ( get_edit_post_link() ) : 
-					// 	edit_post_link(
-					// 		sprintf(
-					// 			/* translators: %s: Name of current post */
-					// 			esc_html__( 'Edit %s', 'theme-aeris' ),
-					// 			the_title( '<span class="screen-reader-text">"', '"</span>', false )
-					// 		),
-					// 		'<span class="edit-link">',
-					// 		'</span>'
-					// 	);
-					// endif; 
-
-					the_post_navigation();
-
-					?>
+					<?php the_post_navigation();?>
 				</footer><!-- .entry-meta -->
 			</article>
-			<?php			
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-			?>
 
 		</main><!-- #main -->
-		
-		<?php 
-		get_sidebar();
-		?>
+
 	</div><!-- #primary -->
 <?php
 endwhile; // End of the loop.
