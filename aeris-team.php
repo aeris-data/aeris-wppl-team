@@ -35,8 +35,11 @@ function aeris_team_manager_plugin_init(){
 
     } else {
     // Le plugin est activé 
+    
+    // FLUSH REWRITE RULE !!! SEULEMENT à L'ACTIVATION/DESACTIVATION DU PLUGIN
 
-    //require_once 'inc/acf-config.php';
+
+    require_once 'inc/acf-config.php';
         /** 
         * Création du custom post type (cpt)
         */
