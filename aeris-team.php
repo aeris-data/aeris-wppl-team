@@ -4,7 +4,7 @@
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 * Description: Plugin pour gérer les membres et les équipes
 * Author: Pierre VERT
-* Version: 0.2.0
+* Version: 0.3.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
 * GitHub Branch:     master
 */

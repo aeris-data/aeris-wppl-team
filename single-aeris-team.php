@@ -40,9 +40,15 @@ while ( have_posts() ) : the_post();
 					<?php if ( $members ): ?>
 					<section class="aeris_team_manager_listMembers">
 						<?php foreach ( $members as $post ):  ?>
-							<?php setup_postdata ($post); ?>
+							<?php 
+							setup_postdata ($post); 
+							// protect email
+							$mail = explode('@', get_field( 'mail' ));
+							
+							?>
+							
 							<article class="aeris_team_manager_embedMembers">
-								
+								<div>
 								<?php 
 								// Include photo
 								$image = get_field( 'photo' ); 
@@ -55,18 +61,19 @@ while ( have_posts() ) : the_post();
 								<?php	
 								} 
 								?>
-								<section>
-									<h3>
-										<a href="<?php the_permalink(); ?>"><?php the_field( 'lastname' ); ?> <?php the_field( 'firstname' ); ?></a>
-									</h3>
-									<p>
-									<?php the_field( 'fonction' ); ?>
-									</p>
-									<p>
-										Tel : <?php the_field( 'tel' ); ?><br>
-										Mail : <?php the_field( 'mail' ); ?>
-									</p>
-								</section>
+									<section>
+										<h3>
+											<a href="<?php the_permalink(); ?>"><span class="aeris_team_manager_uppercase"><?php the_field( 'lastname' ); ?></span> <?php the_field( 'firstname' ); ?></a>
+										</h3>
+										<p>
+										<?php the_field( 'fonction' ); ?>
+										</p>
+										<p>
+											Tel : <?php the_field( 'tel' ); ?><br>
+											Mail : <?php echo $mail[0]; ?><span class="hide">bot, You shall not get my mail</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?>
+										</p>
+									</section>
+								</div>
 							</article>
 						<?php endforeach; ?>
 					</section>
