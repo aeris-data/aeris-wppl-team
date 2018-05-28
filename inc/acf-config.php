@@ -30,11 +30,35 @@ if( function_exists('acf_add_local_field_group') ):
                 'mime_types' => '',
             ),
             array (
+                'key' => 'field_5b0c146276dbe',
+                'label' => 'Affichage',
+                'name' => 'showmetheboss',
+                'type' => 'checkbox',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array (
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array (
+                    'showmetheboss' => 'Afficher le responsable en 1er, sur une ligne indépendante',
+                ),
+                'allow_custom' => 0,
+                'save_custom' => 0,
+                'default_value' => array (
+                ),
+                'layout' => 'vertical',
+                'toggle' => 0,
+                'return_format' => 'value',
+            ),
+            array (
                 'key' => 'field_5acdbb70a7637',
                 'label' => 'Membres',
                 'name' => 'aeris_team_manager_bidirectionnal_relation',
                 'type' => 'relationship',
-                'instructions' => '',
+                'instructions' => 'Le 1er membre de la liste sera considéré comme responsable de l\'équipe',
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array (

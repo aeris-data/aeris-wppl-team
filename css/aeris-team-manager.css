@@ -4,42 +4,99 @@
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 */
 
+.aeris_team_manager_width1400 {
+    max-width: 1400px;
+    margin:0 auto;
+}
 
 .aeris_team_manager_listMembers {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
 
-.aeris_team_manager_embedMembers {
+.aeris_team_manager_listMembers > div:first-child {
     width: 100%;
-
-}
-.aeris_team_manager_embedMembers > div {
-    max-width:450px;
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
+}
+.aeris_team_manager_listMembers > div:first-child > hr {
+    width: 100%;
+}
+
+.aeris_team_manager_embedMembers  {
+    flex:0 1 360px;
     margin-right:20px;
     margin-bottom:20px;
+    padding: 0 10px;
     border: 1px solid #CCC;
     border-radius:10px;
 }
-.aeris_team_manager_embedMembers:not(:first-child) {
-    flex: 0 1 450px;
+
+.aeris_team_manager_embedMembers > * {
+    display: flex;
+    flex-flow: row wrap;
 }
 
-.aeris_team_manager_embedMembers > div > figure {
-    padding: 0 10px;
+.aeris_team_manager_embedMembers > header {
+    position: relative;
 }
 
-.aeris_team_manager_embedMembers > div > figure > img {
+.aeris_team_manager_embedMembers > header > figure {
+    margin:0;
+    padding-right: 10px;
+}
+
+.aeris_team_manager_embedMembers > header > figure > img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
 }
 
+.aeris_team_manager_embedMembers > header > div {
+    flex:1;
+    padding-top:8px;
+}
+
+.aeris_team_manager_embedMembers > header > div > h3 {
+    font-size:1.1rem;
+}
+.aeris_team_manager_embedMembers > header > div > p {
+    font-size:.9rem;
+}
+
 .aeris_team_manager_embedMembers section {
     flex:1;
+    display: none;
+}
+
+label[for^="aeris_team_manager_member_info"] {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top:10px;
+    right: 0;
+    border-radius: 50%;
+    background:#CCC;
+    font-size: 1.2rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+input[id^="aeris_team_manager_member_info"] {
+    display: none;
+}
+input[id^="aeris_team_manager_member_info"]:checked ~ section {
+    display: block;
+}
+input[id^="aeris_team_manager_member_info"]:checked ~ header label,
+.aeris_team_manager_embedMembers > header:hover label[for^="aeris_team_manager_member_info"]  {
+    background:#888;
+    color:white;
 }
 
 .aeris_team_manager_uppercase {
