@@ -23,17 +23,19 @@ while ( have_posts() ) : the_post();
 									
 				<header>
 				<?php $logo = get_field( 'logo' ); ?>
-					<?php if ( $logo ) { ?>
+					
 					<figure>
-					
+					<?php if ( $logo ) { ?>
 						<!-- <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" /> -->
-						<?php echo wp_get_attachment_image( $logo, 'medium' ); ?>
-					
+						<?php echo wp_get_attachment_image( $logo, 'team-logo' ); ?>
+					<?php }	?>
 					</figure>
-					<?php } ?>
+					
 					
 				</header>
-			
+				<section class="wrapper-content">
+					<?php the_content();?>
+				</section>	
             	<section class="wrapper-content">
 					<?php $showmetheboss_array = get_field( 'showmetheboss' );?>
 					<?php $members = get_field( 'aeris_team_manager_bidirectionnal_relation' ); ?>
@@ -51,21 +53,26 @@ while ( have_posts() ) : the_post();
 							<?php if (($i === 0) && ( $showmetheboss_array )){?>							
 							<div>
 							<?php }	?>
-								<article class="aeris_team_manager_embedMembers">
+								<article class="aeris_team_manager_membersEmbed">
 									<input type="checkbox" name="aeris_team_manager_member_info<?php echo $i;?>" id="aeris_team_manager_member_info<?php echo $i;?>">
 									<header title="Click on arrow to show contact informations">
 									<?php 
 									// Include photo
 									$image = get_field( 'photo' ); 
-									$size = "tiny";
-									if ( $image ) { 
-										?>
-										<figure>
-										<?php echo wp_get_attachment_image( $image, $size );?>
-										</figure>
-									<?php	
-									} 
+									$size = "member-photo";
 									?>
+										<figure>
+										<?php if ( $image ) { 
+										?>
+										<?php echo wp_get_attachment_image( $image, $size );?>
+										<?php } else {
+										?>
+											<img src="<?php echo plugin_dir_url ( __FILE__ ) . 'images/user.svg'; ?>" alt="">
+										<?php	
+										} 
+										?>
+										</figure>
+									
 										<div>
 											<h3>
 												<span class="aeris_team_manager_uppercase"><?php the_field( 'lastname' );?></span> <?php the_field( 'firstname' ); ?>
@@ -75,7 +82,7 @@ while ( have_posts() ) : the_post();
 											</p>
 										</div>
 										
-										<label for="aeris_team_manager_member_info<?php echo $i;?>"><!--<i class="fa fa-angle-down"></i>--></label>
+										<label for="aeris_team_manager_member_info<?php echo $i;?>"></label>
 										
 									</header>
 									<?php 
@@ -83,14 +90,6 @@ while ( have_posts() ) : the_post();
 									
 									?>
 									<section>
-										<div>
-											<h3>
-												<span class="aeris_team_manager_uppercase"><?php the_field( 'lastname' );?></span> <?php the_field( 'firstname' ); ?>
-											</h3>
-											<p>
-											<?php the_field( 'fonction' ); ?>
-											</p>
-										</div>
 										<?php if ( get_field('tel') || get_field('mail') ) { ?>
 										<p>
 											Tel : <?php the_field( 'tel' ); ?><br>
@@ -102,12 +101,11 @@ while ( have_posts() ) : the_post();
 										<?php 
 										foreach ( $teams as $team) {
 										?>	
-											<li><?php // var_dump($team);?>
+											<li>
 												<a href="<?php echo $team -> guid;?>" title="<?php echo $team -> post_title;?>">
 												<?php echo $team -> post_title;?></a>
 											</li>
 										<?php
-										$x++;
 										}
 										?>	
 										</ul>

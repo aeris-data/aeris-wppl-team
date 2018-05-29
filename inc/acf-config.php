@@ -74,7 +74,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'filters' => array (
                     0 => 'search',
                     1 => 'post_type',
-                    2 => 'taxonomy',
                 ),
                 'elements' => '',
                 'min' => '',
@@ -250,25 +249,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array (
-                'key' => 'field_5acdbfa8db83c',
-                'label' => 'Compétences',
-                'name' => 'competences',
-                'type' => 'wysiwyg',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array (
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'default_value' => '',
-                'tabs' => 'all',
-                'toolbar' => 'full',
-                'media_upload' => 1,
-                'delay' => 0,
             ),
         ),
         'location' => array (

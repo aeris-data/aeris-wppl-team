@@ -191,7 +191,15 @@ function aeris_team_manager_plugin_init(){
             }
             return $single_template;
         }
-        
+        /* Add image size for team logo
+        * https://developer.wordpress.org/reference/functions/add_image_size/
+        */
+        function aeris_team_manager_images_setup() {
+            add_image_size( 'team-logo', 200, 200, false );
+            add_image_size( 'member-photo', 150, 150, true );
+
+        }
+        add_action( 'after_setup_theme', 'aeris_team_manager_images_setup' );
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------    
     } // end test plugin ACF
