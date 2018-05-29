@@ -26,7 +26,8 @@ while ( have_posts() ) : the_post();
 					<?php if ( $logo ) { ?>
 					<figure>
 					
-						<img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" />
+						<!-- <img src="<?php echo $logo['url']; ?>" alt="<?php echo $logo['alt']; ?>" /> -->
+						<?php echo wp_get_attachment_image( $logo, 'medium' ); ?>
 					
 					</figure>
 					<?php } ?>
@@ -56,7 +57,7 @@ while ( have_posts() ) : the_post();
 									<?php 
 									// Include photo
 									$image = get_field( 'photo' ); 
-									$size = "medium";
+									$size = "tiny";
 									if ( $image ) { 
 										?>
 										<figure>
@@ -74,27 +75,49 @@ while ( have_posts() ) : the_post();
 											</p>
 										</div>
 										
-									<?php // show deploy button for email & phone
-									if ( get_field('tel') || get_field('mail') ) {										
-									?>
-										<label for="aeris_team_manager_member_info<?php echo $i;?>"><i class="fa fa-angle-down"></i></label>
+										<label for="aeris_team_manager_member_info<?php echo $i;?>"><!--<i class="fa fa-angle-down"></i>--></label>
 										
-									<?php } ?>
 									</header>
-									<?php if ( get_field('tel') || get_field('mail') ) {
-									?>									
+									<?php 
+									$teams = get_field( 'aeris_team_manager_bidirectionnal_relation' ); 
+									
+									?>
 									<section>
+										<div>
+											<h3>
+												<span class="aeris_team_manager_uppercase"><?php the_field( 'lastname' );?></span> <?php the_field( 'firstname' ); ?>
+											</h3>
+											<p>
+											<?php the_field( 'fonction' ); ?>
+											</p>
+										</div>
+										<?php if ( get_field('tel') || get_field('mail') ) { ?>
 										<p>
 											Tel : <?php the_field( 'tel' ); ?><br>
 											Mail : <?php echo $mail[0]; ?><span class="hide">Dear bot, you will not collect my email</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?>
 										</p>
+										<?php } ?>	
+										<h4>Member of :</h4>
+										<ul>
+										<?php 
+										foreach ( $teams as $team) {
+										?>	
+											<li><?php // var_dump($team);?>
+												<a href="<?php echo $team -> guid;?>" title="<?php echo $team -> post_title;?>">
+												<?php echo $team -> post_title;?></a>
+											</li>
+										<?php
+										$x++;
+										}
+										?>	
+										</ul>
 									</section>
-									<?php } ?>										
+													
 								</article>
-							<?php if (($i === 0) && ( $showmetheboss_array )) {?>	
-								<hr>						
+							<?php if (($i === 0) && ( $showmetheboss_array )) {?>
+								<hr>
 							</div>
-							<?php }	
+							<?php }
 							$i++;
 							?>
 						<?php endforeach; ?>
@@ -102,7 +125,6 @@ while ( have_posts() ) : the_post();
 					<?php wp_reset_postdata(); ?>
 					<?php endif; ?>
 		        </section>
-				
 
 				<!--<footer>
 					<?php //the_post_navigation();?>
