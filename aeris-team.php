@@ -3,6 +3,8 @@
 * Plugin Name: Aeris Team Manager
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 * Description: Plugin pour gérer les membres et les équipes
+* Text Domain: aeris-wppl-team-manager
+* Domain Path: /languages
 * Author: Pierre VERT
 * Version: 0.3.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
@@ -203,14 +205,18 @@ function aeris_team_manager_plugin_init(){
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
-        /*
-        * SHORTCODE FOR INSERT TEAM
+        /****************************************************************************************************
+        * SHORTCODES
         */
 
         function aeris_team_manager_register_shortcodes(){
             add_shortcode('aeris_team', 'aeris_team_manager_team_shortcode');
             add_shortcode('aeris_member', 'aeris_team_manager_member_shortcode');
         }
+
+        /*************************************************************************
+        * SHORTCODE FOR INSERT TEAM
+        */
 
         // Team Shortcode output
         function aeris_team_manager_team_shortcode($atts) {
@@ -232,7 +238,7 @@ function aeris_team_manager_plugin_init(){
             ob_start();
             ?>
             <div class="aeris_team_manager_shortcode_team_display">
-
+                <h2><?php the_title();?></h2>
             <?php
             include( 'template-parts/aeris-team-showteam.php' );
             ?>
@@ -243,7 +249,62 @@ function aeris_team_manager_plugin_init(){
             return $out;
         }
 
-        // Member Shortcode output
+        /** ********************************************************************
+         * 
+         * Show Team Shortcode in admin page
+        */
+
+        /** *******************************************
+         * 1 . Ajout de la colonne Shortcode pour les CPT aeris-team
+         * 
+         */
+
+        function aeris_team_manager_team_shortcode_columns($column) {
+            $column['shortcode'] = 'Shortcode';
+            return $column;
+        }
+        add_filter('manage_aeris-team_posts_columns', 'aeris_team_manager_team_shortcode_columns');
+    
+        /** ********************************************************************
+         * 2 . Html à afficher dans les lignes de la colonne Shortcode 
+         * pour les CPT aeris-team 
+         */
+        function aeris_team_manager_team_shortcode_rows($column, $post_id) {
+            switch ($column) {
+                    case 'shortcode':
+                        echo "[aeris_team id=" . $post_id . "]";                                                    
+                        break;
+                    default:
+                        break;
+            }
+        }
+        add_action('manage_aeris-team_posts_custom_column', 'aeris_team_manager_team_shortcode_rows', 10, 2);
+
+        /**
+         * 3 . Adds a box to the main column on the Aeris-team edit screens.
+         */
+        function aeris_team_manager_team_shortcode_metabox() {
+            add_meta_box(
+                'aeris_team_manager_team_metabox_id',
+                __('Shortcode integration', 'aeris-wppl-team-manager'),
+                'aeris_team_manager_team_shortcode_metabox_callback', 'aeris-team', 'side'
+            );
+        }
+        add_action('add_meta_boxes', 'aeris_team_manager_team_shortcode_metabox');
+        
+        /**
+         * 4 . Render meta box content for CPT aeris-team
+         */
+        function aeris_team_manager_team_shortcode_metabox_callback($post) {
+            echo '<p style="font-size:1.5rem;color:#4765a0;"><strong>[aeris_team id="' . $post->ID . '"]</strong></p>';
+        }
+
+
+        /*************************************************************************
+        * SHORTCODE FOR INSERT MEMBER
+        */
+
+        // Member Shortcode output **********************************
         function aeris_team_manager_member_shortcode($atts) {
             global $post;
             $atts = shortcode_atts([
@@ -274,9 +335,95 @@ function aeris_team_manager_plugin_init(){
             return $out;
         }
 
+        // hook in wordpress
         add_action( 'init', 'aeris_team_manager_register_shortcodes');
 
+        /** ********************************************************************
+         * 
+         * Show Member Shortcode in admin page
+        */
 
+        /** *******************************************
+         * 1 . Ajout de la colonne Shortcode pour les CPT aeris-member
+         * 
+         */
+        function aeris_team_manager_member_shortcode_columns($column) {
+            $column['shortcode'] = 'Shortcode';
+            return $column;
+        }
+        add_filter('manage_aeris-member_posts_columns', 'aeris_team_manager_member_shortcode_columns');
+    
+        /** *******************************************
+         * 2 . Html à afficher dans les lignes de la colonne Shortcode 
+         * pour les CPT aeris-member 
+         */
+
+        function aeris_team_manager_member_shortcode_rows($column, $post_id) {
+            switch ($column) {
+                    case 'shortcode':
+                        echo "[aeris_member id=" . $post_id . "]";                                                    
+                        break;
+                    default:
+                        break;
+            }
+        }
+        add_action('manage_aeris-member_posts_custom_column', 'aeris_team_manager_member_shortcode_rows', 10, 2);
+
+        /** ********************************************************************
+         * 3 . Adds a box to the main column on the 
+         * aeris-member edit screens.
+         */
+        function aeris_team_manager_member_shortcode_metabox() {
+            add_meta_box(
+                'aeris_team_manager_member_metabox_id',
+                __('Shortcode integration', 'aeris-wppl-team-manager'),
+                'aeris_team_manager_member_shortcode_metabox_callback', 'aeris-member', 'side'
+            );
+        }
+        add_action('add_meta_boxes', 'aeris_team_manager_member_shortcode_metabox');
+        
+        /** ******************************************
+         * 4 . Render meta box content for CPT aeris-member
+         */
+        function aeris_team_manager_member_shortcode_metabox_callback($post) {
+            echo '<p style="font-size:1.3rem;color:#4765a0;"><strong>[aeris_member id="' . $post->ID . '"]</strong></p>';
+        }
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------    
+        /*
+        * Custom CSS FOR AERIS THEME
+        */     
+        function aeris_team_manager_customCSS() {
+
+            if (get_theme_mod('theme_aeris_main_color') == "custom" ) {
+                $code_color = get_theme_mod( 'theme_aeris_color_code' );
+            }
+            else {
+                $code_color	= get_theme_mod( 'theme_aeris_main_color' );
+            }
+            ?>
+            <style>
+                input[id^="aeris_team_manager_member_info"]:checked ~ header,
+                .aeris_team_manager_memberSingle > header {
+                    background: <?php echo $code_color;?> ;
+                }
+                label[for^="aeris_team_manager_member_info"] { 
+                    background: <?php echo $code_color;?>;
+                    color:#FFF;
+                }
+                .aeris_team_manager_membersEmbed > header:hover label[for^="aeris_team_manager_member_info"] {
+                    background:<?php echo get_theme_mod('theme_aeris_second_color_code' );?>
+                }
+
+                input[id^="aeris_team_manager_member_info"]:checked ~ header label {
+                    background:#EEE;
+                    color:<?php echo $code_color;?>;
+                }
+
+            </style>
+            <?php
+        }
+        add_action('wp_head', 'aeris_team_manager_customCSS');
 //---------------------------------------------------------------------------------------------------------------------------------------------------------    
     } // end test plugin ACF
 
