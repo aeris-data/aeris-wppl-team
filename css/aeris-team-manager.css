@@ -4,12 +4,18 @@
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 */
 
-.aeris_team_manager_width1400 {
-    max-width: 1400px;
-    margin:0 auto;
-}
-.aeris_team_manager_width600 {
+.single-aeris-member .aeris_team_manager_wrapper {
     max-width: 600px;
+}
+.single-aeris-team .aeris_team_manager_wrapper {
+    max-width: 1900px;
+}
+
+.wd1400 {
+    max-width: 800px;
+}
+
+.aeris_team_manager_wrapper {
     margin:0 auto;
 }
 
@@ -151,6 +157,27 @@ input[id^="aeris_team_manager_member_info"]:checked ~  section > ul,
 .aeris_team_manager_uppercase {
     text-transform: uppercase;
 }
+
+/** 
+* SHORTCODE DISPLAY
+*/
+.aeris_team_manager_shortcode_team_display > article > section > .wrapper-content,
+.aeris_team_manager_shortcode_team_display > article > section.wrapper-content {
+    width:100%;
+    padding:0;
+}
+
+.aeris_team_manager_shortcode_member_display {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.aeris_team_manager_shortcode_team_display > article > section.wrapper-content .aeris_team_manager_membersEmbed {
+    flex: 0 1 300px;
+}
+/**
+* Helpers
+*/
 
 .hide {
     display: none;

@@ -201,6 +201,82 @@ function aeris_team_manager_plugin_init(){
         }
         add_action( 'after_setup_theme', 'aeris_team_manager_images_setup' );
 
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+        /*
+        * SHORTCODE FOR INSERT TEAM
+        */
+
+        function aeris_team_manager_register_shortcodes(){
+            add_shortcode('aeris_team', 'aeris_team_manager_team_shortcode');
+            add_shortcode('aeris_member', 'aeris_team_manager_member_shortcode');
+        }
+
+        // Team Shortcode output
+        function aeris_team_manager_team_shortcode($atts) {
+            global $post;
+            $atts = shortcode_atts([
+                'id' => null,
+            ], $atts, 'aeris_team');
+
+            if (!$atts['id']) {
+                return;
+            }
+            $_post = get_post($atts['id']);
+            if (!$_post || 'publish' !== $_post->post_status) {
+                return;
+            }
+            $post = $_post;
+            setup_postdata($post);
+
+            ob_start();
+            ?>
+            <div class="aeris_team_manager_shortcode_team_display">
+
+            <?php
+            include( 'template-parts/aeris-team-showteam.php' );
+            ?>
+            </div>
+            <?php
+            $out = ob_get_clean();
+            wp_reset_postdata();
+            return $out;
+        }
+
+        // Member Shortcode output
+        function aeris_team_manager_member_shortcode($atts) {
+            global $post;
+            $atts = shortcode_atts([
+                'id' => null,
+            ], $atts, 'aeris_member');
+
+            if (!$atts['id']) {
+                return;
+            }
+            $_post = get_post($atts['id']);
+            if (!$_post || 'publish' !== $_post->post_status) {
+                return;
+            }
+            $post = $_post;
+            setup_postdata($post);
+
+            ob_start();
+            ?>
+            <div class="aeris_team_manager_shortcode_member_display">
+
+            <?php
+            include( 'template-parts/aeris-team-showmember.php' );
+            ?>
+            </div>
+            <?php
+            $out = ob_get_clean();
+            wp_reset_postdata();
+            return $out;
+        }
+
+        add_action( 'init', 'aeris_team_manager_register_shortcodes');
+
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------    
     } // end test plugin ACF
 
