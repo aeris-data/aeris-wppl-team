@@ -15,27 +15,11 @@ while ( have_posts() ) : the_post();
 	get_template_part( 'template-parts/header-content', 'page' );
 ?>
 
-	<div id="content-area" class="wrapper sidebar">
+	<div id="content-area" class="aeris_team_manager_wrapper">
 		<main id="main" class="site-main" role="main">
-		
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-									
-				<header>
-			        
-				</header>
-			
-            	<section class="wrapper-content">
-
-					<?php 
-						the_content();
-					?>
-		        </section>				
-
-				<footer>
-					<?php the_post_navigation();?>
-				</footer><!-- .entry-meta -->
-
-
+		<?php
+			include( 'template-parts/aeris-team-showmember.php' );
+		?>	
 		</main><!-- #main -->
 
 	</div><!-- #primary -->

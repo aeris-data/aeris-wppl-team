@@ -3,11 +3,11 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array (
         'key' => 'group_5acdbb4075390',
-        'title' => 'Equipe',
+        'title' => __('Team', 'aeris-wppl-team-manager'),
         'fields' => array (
             array (
                 'key' => 'field_5acdc41010911',
-                'label' => 'logo',
+                'label' => __('Logo', 'aeris-wppl-team-manager'),
                 'name' => 'logo',
                 'type' => 'image',
                 'instructions' => '',
@@ -30,11 +30,35 @@ if( function_exists('acf_add_local_field_group') ):
                 'mime_types' => '',
             ),
             array (
+                'key' => 'field_5b0c146276dbe',
+                'label' => __('Display', 'aeris-wppl-team-manager'),
+                'name' => 'showmetheboss',
+                'type' => 'checkbox',
+                'instructions' => '',
+                'required' => 0,
+                'conditional_logic' => 0,
+                'wrapper' => array (
+                    'width' => '',
+                    'class' => '',
+                    'id' => '',
+                ),
+                'choices' => array (
+                    'showmetheboss' => __('Show the manager first, on an independent line', 'aeris-wppl-team-manager'),
+                ),
+                'allow_custom' => 0,
+                'save_custom' => 0,
+                'default_value' => array (
+                ),
+                'layout' => 'vertical',
+                'toggle' => 0,
+                'return_format' => 'value',
+            ),
+            array (
                 'key' => 'field_5acdbb70a7637',
-                'label' => 'Membres',
+                'label' => __('Members', 'aeris-wppl-team-manager'),
                 'name' => 'aeris_team_manager_bidirectionnal_relation',
                 'type' => 'relationship',
-                'instructions' => '',
+                'instructions' => __('The 1st member of the list will be considered as manager for the team', 'aeris-wppl-team-manager'),
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array (
@@ -50,7 +74,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'filters' => array (
                     0 => 'search',
                     1 => 'post_type',
-                    2 => 'taxonomy',
                 ),
                 'elements' => '',
                 'min' => '',
@@ -83,7 +106,7 @@ if( function_exists('acf_add_local_field_group') ):
         'fields' => array (
             array (
                 'key' => 'field_5ad9f2879041b',
-                'label' => 'Nom',
+                'label' => __('Name', 'aeris-wppl-team-manager'),
                 'name' => 'lastname',
                 'type' => 'text',
                 'instructions' => '',
@@ -102,7 +125,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc21ff0a0f',
-                'label' => 'Prénom',
+                'label' => __('firstname', 'aeris-wppl-team-manager'),
                 'name' => 'firstname',
                 'type' => 'text',
                 'instructions' => '',
@@ -121,7 +144,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc0d4cbe12',
-                'label' => 'Photo',
+                'label' => __('Photo', 'aeris-wppl-team-manager'),
                 'name' => 'photo',
                 'type' => 'image',
                 'instructions' => '',
@@ -145,7 +168,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc027db83d',
-                'label' => 'Mail',
+                'label' => __('Email', 'aeris-wppl-team-manager'),
                 'name' => 'mail',
                 'type' => 'email',
                 'instructions' => '',
@@ -163,7 +186,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc047db83e',
-                'label' => 'Tel',
+                'label' => __('Phone :', 'aeris-wppl-team-manager'),
                 'name' => 'tel',
                 'type' => 'text',
                 'instructions' => '',
@@ -182,7 +205,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdbc42db83a',
-                'label' => 'Equipe',
+                'label' => __('Teams', 'aeris-wppl-team-manager'),
                 'name' => 'aeris_team_manager_bidirectionnal_relation',
                 'type' => 'relationship',
                 'instructions' => '',
@@ -210,7 +233,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdbc64db83b',
-                'label' => 'Fonction',
+                'label' => __('Position', 'aeris-wppl-team-manager'),
                 'name' => 'fonction',
                 'type' => 'text',
                 'instructions' => '',
@@ -226,25 +249,6 @@ if( function_exists('acf_add_local_field_group') ):
                 'prepend' => '',
                 'append' => '',
                 'maxlength' => '',
-            ),
-            array (
-                'key' => 'field_5acdbfa8db83c',
-                'label' => 'Compétences',
-                'name' => 'competences',
-                'type' => 'wysiwyg',
-                'instructions' => '',
-                'required' => 0,
-                'conditional_logic' => 0,
-                'wrapper' => array (
-                    'width' => '',
-                    'class' => '',
-                    'id' => '',
-                ),
-                'default_value' => '',
-                'tabs' => 'all',
-                'toolbar' => 'full',
-                'media_upload' => 1,
-                'delay' => 0,
             ),
         ),
         'location' => array (
@@ -295,17 +299,14 @@ function aeris_team_manager_bidirectional_acf_update_value( $value, $post_id, $f
 	$field_name = $field['name'];
 	$field_key = $field['key'];
 	$global_name = 'is_updating_' . $field_name;
-	
-	
+		
 	// bail early if this filter was triggered from the update_field() function called within the loop below
 	// - this prevents an inifinte loop
-	if( !empty($GLOBALS[ $global_name ]) ) return $value;
-	
+	if( !empty($GLOBALS[ $global_name ]) ) return $value;	
 	
 	// set global variable to avoid inifite loop
 	// - could also remove_filter() then add_filter() again, but this is simpler
-	$GLOBALS[ $global_name ] = 1;
-	
+	$GLOBALS[ $global_name ] = 1;	
 	
 	// loop over selected posts and add this $post_id
 	if( is_array($value) ) {
@@ -313,32 +314,23 @@ function aeris_team_manager_bidirectional_acf_update_value( $value, $post_id, $f
 		foreach( $value as $post_id2 ) {
 			
 			// load existing related posts
-			$value2 = get_field($field_name, $post_id2, false);
-			
+			$value2 = get_field($field_name, $post_id2, false);			
 			
 			// allow for selected posts to not contain a value
-			if( empty($value2) ) {
-				
-				$value2 = array();
-				
+			if( empty($value2) ) {				
+				$value2 = array();				
 			}
 			
-			
 			// bail early if the current $post_id is already found in selected post's $value2
-			if( in_array($post_id, $value2) ) continue;
-			
+			if( in_array($post_id, $value2) ) continue;			
 			
 			// append the current $post_id to the selected post's 'related_posts' value
-			$value2[] = $post_id;
-			
+			$value2[] = $post_id;			
 			
 			// update the selected post's value (use field's key for performance)
-			update_field($field_key, $value2, $post_id2);
-			
+			update_field($field_key, $value2, $post_id2);			
 		}
-	
 	}
-	
 	
 	// find posts which have been removed
 	$old_value = get_field($field_name, $post_id, false);
@@ -350,34 +342,24 @@ function aeris_team_manager_bidirectional_acf_update_value( $value, $post_id, $f
 			// bail early if this value has not been removed
 			if( is_array($value) && in_array($post_id2, $value) ) continue;
 			
-			
 			// load existing related posts
-			$value2 = get_field($field_name, $post_id2, false);
-			
+			$value2 = get_field($field_name, $post_id2, false);			
 			
 			// bail early if no value
-			if( empty($value2) ) continue;
-			
+			if( empty($value2) ) continue;			
 			
 			// find the position of $post_id within $value2 so we can remove it
-			$pos = array_search($post_id, $value2);
-			
+			$pos = array_search($post_id, $value2);			
 			
 			// remove
-			unset( $value2[ $pos] );
-			
+			unset( $value2[ $pos] );			
 			
 			// update the un-selected post's value (use field's key for performance)
-			update_field($field_key, $value2, $post_id2);
-			
-		}
-		
+			update_field($field_key, $value2, $post_id2);			
+		}		
 	}
-	
-	
 	// reset global varibale to allow this filter to function as per normal
 	$GLOBALS[ $global_name ] = 0;
-	
 	
 	// return
     return $value;
