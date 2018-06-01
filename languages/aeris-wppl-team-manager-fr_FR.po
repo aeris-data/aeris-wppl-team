@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: Aeris Team Manager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 09:28+0000\n"
-"PO-Revision-Date: 2018-06-01 09:37+0000\n"
+"PO-Revision-Date: 2018-06-01 13:02+0000\n"
 "Last-Translator: poleweb <pvert@mel2.obs-mip.fr>\n"
-"Language-Team: Français\n"
+"Language-Team: French (France)\n"
 "Language: fr_FR\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
@@ -103,7 +103,7 @@ msgstr "Pas d'équipe trouvée dans la corbeille"
 
 #: template-parts/aeris-team-memberinfosection.php:9
 msgid "Phone :"
-msgstr "Tel :"
+msgstr ""
 
 #: inc/acf-config.php:147
 msgid "Photo"
