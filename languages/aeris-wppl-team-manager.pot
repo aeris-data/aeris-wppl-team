@@ -1,0 +1,163 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Aeris Team Manager\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-01 09:28+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/"
+
+#: aeris-team.php:157
+msgid "Add member"
+msgstr ""
+
+#: aeris-team.php:123
+msgid "Add team"
+msgstr ""
+
+#. Name of the plugin
+msgid "Aeris Team Manager"
+msgstr ""
+
+#: inc/acf-config.php:34
+msgid "Display"
+msgstr ""
+
+#: aeris-team.php:158
+msgid "Edit member"
+msgstr ""
+
+#: aeris-team.php:124
+msgid "Edit team"
+msgstr ""
+
+#: inc/acf-config.php:171
+msgid "Email"
+msgstr ""
+
+#: template-parts/aeris-team-memberinfosection.php:10
+msgid "Email :"
+msgstr ""
+
+#: inc/acf-config.php:128
+msgid "firstname"
+msgstr ""
+
+#: inc/acf-config.php:10
+msgid "Logo"
+msgstr ""
+
+#: aeris-team.php:156
+msgid "Manage members"
+msgstr ""
+
+#: aeris-team.php:122
+msgid "Manage teams"
+msgstr ""
+
+#: aeris-team.php:152 aeris-team.php:155
+msgid "Member"
+msgstr ""
+
+#: template-parts/aeris-team-memberinfosection.php:13
+msgid "Member of :"
+msgstr ""
+
+#: aeris-team.php:154 inc/acf-config.php:58
+msgid "Members"
+msgstr ""
+
+#: inc/acf-config.php:109
+msgid "Name"
+msgstr ""
+
+#: aeris-team.php:159
+msgid "New member"
+msgstr ""
+
+#: aeris-team.php:125
+msgid "New team"
+msgstr ""
+
+#: aeris-team.php:162
+msgid "No member found"
+msgstr ""
+
+#: aeris-team.php:163
+msgid "No member found in trash"
+msgstr ""
+
+#: aeris-team.php:128
+msgid "No team found"
+msgstr ""
+
+#: aeris-team.php:129
+msgid "No team found in trash"
+msgstr ""
+
+#: template-parts/aeris-team-memberinfosection.php:9
+msgid "Phone :"
+msgstr ""
+
+#: inc/acf-config.php:147
+msgid "Photo"
+msgstr ""
+
+#. Author of the plugin
+msgid "Pierre VERT"
+msgstr ""
+
+#. Description of the plugin
+msgid "Plugin pour gérer les membres et les équipes"
+msgstr ""
+
+#: inc/acf-config.php:236
+msgid "Position"
+msgstr ""
+
+#: aeris-team.php:161
+msgid "Search member"
+msgstr ""
+
+#: aeris-team.php:127
+msgid "Search team"
+msgstr ""
+
+#: aeris-team.php:160
+msgid "See member"
+msgstr ""
+
+#: aeris-team.php:126
+msgid "See team"
+msgstr ""
+
+#: aeris-team.php:304 aeris-team.php:394
+msgid "Shortcode integration"
+msgstr ""
+
+#: inc/acf-config.php:46
+msgid "Show the manager first, on an independent line"
+msgstr ""
+
+#: aeris-team.php:118 aeris-team.php:121 inc/acf-config.php:6
+msgid "Team"
+msgstr ""
+
+#: aeris-team.php:120 inc/acf-config.php:208
+msgid "Teams"
+msgstr ""
+
+#: inc/acf-config.php:189
+msgid "Tel"
+msgstr ""
+
+#: inc/acf-config.php:61
+msgid "The 1st member of the list will be considered as manager for the team"
+msgstr ""

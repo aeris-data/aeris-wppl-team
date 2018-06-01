@@ -55,6 +55,21 @@ function aeris_team_manager_plugin_init(){
         }   
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
+        /* 
+        * LOAD TEXT DOMAIN FOR TEXT TRANSLATIONS
+        */
+
+        function aeris_team_manager_load_plugin_textdomain() {
+            $domain = 'aeris-wppl-team-manager';
+            $locale = apply_filters( 'plugin_locale', get_locale(), $domain );
+            // wp-content/languages/plugin-name/plugin-name-fr_FR.mo
+            load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
+            // wp-content/plugins/plugin-name/languages/plugin-name-fr_FR.mo
+            load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+        }
+        add_action( 'init', 'aeris_team_manager_load_plugin_textdomain' );
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
         // LOAD ACF CONFIG FILE & custom functions for ACF
         require_once 'inc/acf-config.php';
 
@@ -100,18 +115,18 @@ function aeris_team_manager_plugin_init(){
             register_post_type( 
                 'aeris-team', 							
                 array(
-                    'label' => 'Equipe', 			
+                    'label' => __('Team', 'aeris-wppl-team-manager'), 			
                     'labels' => array(    			
-                        'name' => 'Equipes',
-                        'singular-name' => 'équipe',
-                        'all_items' => 'Gérer les équipes',
-                        'add_new_item' => 'Ajouter une équipe',
-                        'edit_item' => 'Editer l\'équipe',
-                        'new_item' => 'Nouveau équipe',
-                        'view_item' => 'Voir l\'équipe',
-                        'search_item' => 'Rechercher parmis les équipes',
-                        'not_found' => 'Pas d\'équipe trouvé',
-                        'not_found_in_trash' => 'Pas d\'équipe dans la corbeille'
+                        'name' => __('Teams', 'aeris-wppl-team-manager'),
+                        'singular-name' => __('Team', 'aeris-wppl-team-manager'),
+                        'all_items' => __('Manage teams', 'aeris-wppl-team-manager'),
+                        'add_new_item' => __('Add team', 'aeris-wppl-team-manager'),
+                        'edit_item' => __('Edit team', 'aeris-wppl-team-manager'),
+                        'new_item' => __('New team', 'aeris-wppl-team-manager'),
+                        'view_item' => __('See team', 'aeris-wppl-team-manager'),
+                        'search_item' => __('Search team', 'aeris-wppl-team-manager'),
+                        'not_found' => __('No team found', 'aeris-wppl-team-manager'),
+                        'not_found_in_trash' => __('No team found in trash', 'aeris-wppl-team-manager')
                     ),
                     'public' => true, 				
                     'show_in_rest' => true,         
@@ -134,18 +149,18 @@ function aeris_team_manager_plugin_init(){
             register_post_type( 
                 'aeris-member', 							
                 array(
-                    'label' => 'Membre', 			
+                    'label' => __('Member', 'aeris-wppl-team-manager'), 			
                     'labels' => array(    			
-                        'name' => 'Membres',
-                        'singular-name' => 'membre',
-                        'all_items' => 'Gérer les membres',
-                        'add_new_item' => 'Ajouter un membre',
-                        'edit_item' => 'Editer le membre',
-                        'new_item' => 'Nouveau membre',
-                        'view_item' => 'Voir le membre',
-                        'search_item' => 'Rechercher parmis les membres',
-                        'not_found' => 'Pas de membre trouvé',
-                        'not_found_in_trash' => 'Pas de membre dans la corbeille'
+                        'name' => __('Members', 'aeris-wppl-team-manager'),
+                        'singular-name' => __('Member', 'aeris-wppl-team-manager'),
+                        'all_items' => __('Manage members', 'aeris-wppl-team-manager'),
+                        'add_new_item' => __('Add member', 'aeris-wppl-team-manager'),
+                        'edit_item' => __('Edit member', 'aeris-wppl-team-manager'),
+                        'new_item' => __('New member', 'aeris-wppl-team-manager'),
+                        'view_item' => __('See member', 'aeris-wppl-team-manager'),
+                        'search_item' => __('Search member', 'aeris-wppl-team-manager'),
+                        'not_found' => __('No member found', 'aeris-wppl-team-manager'),
+                        'not_found_in_trash' => __('No member found in trash', 'aeris-wppl-team-manager')
                     ),
                     'public' => true, 				
                     'show_in_rest' => true,         
