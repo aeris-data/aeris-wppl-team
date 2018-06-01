@@ -31,7 +31,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5b0c146276dbe',
-                'label' => __('Display', 'aeris-wppl-team-manager'),
+                'label' => __('Display / Affichage', 'aeris-wppl-team-manager'),
                 'name' => 'showmetheboss',
                 'type' => 'checkbox',
                 'instructions' => '',
@@ -43,7 +43,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'id' => '',
                 ),
                 'choices' => array (
-                    'showmetheboss' => __('Show the manager first, on an independent line', 'aeris-wppl-team-manager'),
+                    'showmetheboss' => __('Show the manager first, on an independent line / Afficher le responsable en 1er, sur une ligne indépendante', 'aeris-wppl-team-manager'),
                 ),
                 'allow_custom' => 0,
                 'save_custom' => 0,
@@ -55,10 +55,10 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdbb70a7637',
-                'label' => __('Members', 'aeris-wppl-team-manager'),
+                'label' => __('Members / Membres', 'aeris-wppl-team-manager'),
                 'name' => 'aeris_team_manager_bidirectionnal_relation',
                 'type' => 'relationship',
-                'instructions' => __('The 1st member of the list will be considered as manager for the team', 'aeris-wppl-team-manager'),
+                'instructions' => __('The 1st member of the list will be considered as manager for the team / Le 1er membre de la liste sera considéré comme responsable de l\'équipe', 'aeris-wppl-team-manager'),
                 'required' => 0,
                 'conditional_logic' => 0,
                 'wrapper' => array (
@@ -106,7 +106,7 @@ if( function_exists('acf_add_local_field_group') ):
         'fields' => array (
             array (
                 'key' => 'field_5ad9f2879041b',
-                'label' => __('Name', 'aeris-wppl-team-manager'),
+                'label' => __('Name / Nom', 'aeris-wppl-team-manager'),
                 'name' => 'lastname',
                 'type' => 'text',
                 'instructions' => '',
@@ -125,7 +125,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc21ff0a0f',
-                'label' => __('firstname', 'aeris-wppl-team-manager'),
+                'label' => __('firstname / Prénom', 'aeris-wppl-team-manager'),
                 'name' => 'firstname',
                 'type' => 'text',
                 'instructions' => '',
@@ -186,7 +186,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdc047db83e',
-                'label' => __('Phone :', 'aeris-wppl-team-manager'),
+                'label' => __('Phone / Tel', 'aeris-wppl-team-manager'),
                 'name' => 'tel',
                 'type' => 'text',
                 'instructions' => '',
@@ -205,7 +205,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdbc42db83a',
-                'label' => __('Teams', 'aeris-wppl-team-manager'),
+                'label' => __('Teams / Equipes', 'aeris-wppl-team-manager'),
                 'name' => 'aeris_team_manager_bidirectionnal_relation',
                 'type' => 'relationship',
                 'instructions' => '',
@@ -233,7 +233,7 @@ if( function_exists('acf_add_local_field_group') ):
             ),
             array (
                 'key' => 'field_5acdbc64db83b',
-                'label' => __('Position', 'aeris-wppl-team-manager'),
+                'label' => __('Position / Fonction', 'aeris-wppl-team-manager'),
                 'name' => 'fonction',
                 'type' => 'text',
                 'instructions' => '',
