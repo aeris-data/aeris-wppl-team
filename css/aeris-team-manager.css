@@ -4,34 +4,216 @@
 * Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
 */
 
+.single-aeris-member .aeris_team_manager_wrapper {
+    max-width: 600px;
+}
+.single-aeris-team .aeris_team_manager_wrapper {
+    max-width: 1900px;
+}
+
+.wd1400 {
+    max-width: 800px;
+}
+
+.aeris_team_manager_wrapper {
+    margin:0 auto;
+}
 
 .aeris_team_manager_listMembers {
     display: flex;
     flex-flow: row wrap;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
 
-.aeris_team_manager_embedMembers {
-    flex:0 1 450px;
+.aeris_team_manager_listMembers > div:first-child {
+    width: 100%;
     display: flex;
     flex-flow: row wrap;
-    margin-right:20px;
+    justify-content: center;
+}
+.aeris_team_manager_listMembers > div:first-child > hr {
+    width: 100%;
+}
+.aeris_team_manager_listMembers > div:first-child > .aeris_team_manager_membersEmbed {
+    margin-right: 0;
+}
+
+
+[class^="aeris_team_manager_member"]  {
+    flex:0 1 360px;
     margin-bottom:20px;
+    padding: 0;
+
+}
+
+.aeris_team_manager_membersEmbed > * {
+    display: flex;
+    flex-flow: row wrap;
+    transition: all .4s ease;
+}
+
+[class^="aeris_team_manager_member"] > header {
+    margin:0;
+    padding:10px;
+    position: relative;
     border: 1px solid #CCC;
     border-radius:10px;
 }
 
-.aeris_team_manager_embedMembers > figure {
-    padding: 0 10px;
+[class^="aeris_team_manager_member"] > header > figure {
+    margin:0;
+    padding-right: 10px;
+    transition: all .4s ease;
 }
 
-.aeris_team_manager_embedMembers > figure > img {
+[class^="aeris_team_manager_member"] > header > figure > img {
     width: 100px;
     height: 100px;
+    border:1px solid #FFF;
     border-radius: 50%;
 }
+.aeris_team_manager_memberSingle > header > figure > img {
+    width: 200px;
+    height:200px;
+}
 
-.aeris_team_manager_embedMembers section {
+.aeris_team_manager_membersEmbed > header > div {
     flex:1;
+    padding-top:8px;
+}
+
+.aeris_team_manager_membersEmbed > header > div > h3 {
+    font-size:1.1rem;
+}
+.aeris_team_manager_membersEmbed > header > div > p,
+.aeris_team_manager_membersEmbed > section > div,
+.aeris_team_manager_membersEmbed > section > p,
+.aeris_team_manager_membersEmbed > section > ul
+ {
+    font-size:.9rem;
+}
+
+[class^="aeris_team_manager_member"] > section {
+    padding:10px;
+    border: 1px solid #CCC;
+    border-top:none;
+    border-radius:0 0 10px 10px;
+}
+
+.aeris_team_manager_membersEmbed input[id^="aeris_team_manager_member_info"]:not(:checked) ~ section {
+    flex:1;
+    display: none;
+}
+
+label[for^="aeris_team_manager_member_info"] {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    top:10px;
+    right: 10px;
+    border-radius: 50%;
+    background:#CCC;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+    transition:all .4s ease;
+}
+label[for^="aeris_team_manager_member_info"]:before {
+    content:"+";
+    transition:all .4s ease;
+} 
+
+input[id^="aeris_team_manager_member_info"] {
+    display: none;
+}
+input[id^="aeris_team_manager_member_info"]:checked ~ section {
+    display: block;
+}
+input[id^="aeris_team_manager_member_info"]:checked ~ header label,
+.aeris_team_manager_membersEmbed > header:hover label[for^="aeris_team_manager_member_info"]  {
+    background:#888;
+    color:white;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header label[for^="aeris_team_manager_member_info"]:before {
+    content:"-";
+} 
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header {
+    display:block;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header,
+.aeris_team_manager_memberSingle > header {
+    background:#888;
+    border-radius:10px 10px 0 0;
+    color:#FFF;
+}
+
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header > div > h3,
+.aeris_team_manager_memberSingle > header > div > h3,
+[class^="aeris_team_manager_member"] > header > div > p
+ {
+    text-align: center;
+    color:#FFF;
+}
+
+.aeris_team_manager_memberSingle > header > div > h3,
+input[id^="aeris_team_manager_member_info"]:checked ~ header > div > h3
+ {
+    border-color:#EEE;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~  header > figure {
+    margin:0 auto;
+    padding-right: 0;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~  section > h4 {
+    margin:0;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~  section > ul,
+.aeris_team_manager_memberSingle > section > ul {
+    margin:0 0 10px;
+}
+
+.aeris_team_manager_uppercase {
+    text-transform: uppercase;
+}
+
+/** 
+* SHORTCODE DISPLAY
+*/
+.aeris_team_manager_shortcode_team_display > article > section > .wrapper-content,
+.aeris_team_manager_shortcode_team_display > article > section.wrapper-content {
+    width:100%;
+    padding:0;
+}
+
+input[id^="aeris_team_manager_member_info"]:not(:checked) ~ header > div > p {
+    text-align:justify;
+    color:#333;
+}
+
+.aeris_team_manager_shortcode_member_display {
+    display: inline-block;
+    vertical-align: top;
+    margin-right:20px;
+}
+
+.aeris_team_manager_shortcode_team_display > article > section.wrapper-content .aeris_team_manager_membersEmbed {
+    flex: 0 1 300px;
+}
+/**
+* Helpers
+*/
+
+.hide {
+    display: none;
 }
