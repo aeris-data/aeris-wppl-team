@@ -66,12 +66,16 @@ function aeris_team_manager_plugin_init(){
             load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
             // wp-content/plugins/plugin-name/languages/plugin-name-fr_FR.mo
             load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+           
         }
         add_action( 'init', 'aeris_team_manager_load_plugin_textdomain' );
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         // LOAD ACF CONFIG FILE & custom functions for ACF
-        require_once 'inc/acf-config.php';
+        function load_acf_config() {
+           require_once 'inc/acf-config.php';
+        }
+        add_action('init', 'load_acf_config');
 
         // LOAD CSS & SCRIPTS
         function aeris_team_manager_scripts() {
