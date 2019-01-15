@@ -77,12 +77,22 @@ function aeris_team_manager_plugin_init(){
         }
         add_action('init', 'load_acf_config');
 
-        // LOAD CSS & SCRIPTS
+        // LOAD CSS & SCRIPTS 
         function aeris_team_manager_scripts() {
             wp_register_style( 'prefix-style', plugins_url('css/aeris-team-manager.css', __FILE__) );
             wp_enqueue_style( 'prefix-style' );
         }
         add_action('wp_enqueue_scripts','aeris_team_manager_scripts');
+        
+        // LOAD CSS & SCRIPTS FOR GUTENBERG EDITOR
+        function gutenberg_enqueue_block_editor_assets() {
+        	wp_enqueue_script(
+        			'aeris-team-block-js', // Unique handle.
+        			plugins_url('js/team-block.js', __FILE__),
+        			array( 'wp-blocks', 'wp-i18n', 'wp-element' )
+        			);
+        }
+        add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /**
@@ -268,6 +278,12 @@ function aeris_team_manager_plugin_init(){
             return $out;
         }
 
+        // Gutenberg block js/team-block
+        if (function_exists('register_block_type')) {
+        	register_block_type( 'aeris-wppl-team/team-block', array(
+        			'render_callback' => 'aeris_team_manager_team_shortcode'
+        	) );
+        }
         /** ********************************************************************
          * 
          * Show Team Shortcode in admin page
