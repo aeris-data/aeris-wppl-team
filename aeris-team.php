@@ -91,6 +91,7 @@ function aeris_team_manager_plugin_init(){
         			plugins_url('js/team-block.js', __FILE__),
         			array( 'wp-blocks', 'wp-i18n', 'wp-element' )
         			);
+        	wp_localize_script('aeris-team-block-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
         }
         add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
 
@@ -231,8 +232,28 @@ function aeris_team_manager_plugin_init(){
 
         }
         add_action( 'after_setup_theme', 'aeris_team_manager_images_setup' );
+//--------------------------------------------------------------------------------------------------------------------------------
+      /**
+       * SEARCH TEAMS WITH AJAX
+       ***************************/
+        
+        /*
+         * Return json array of team
+         * ie array of couple (value, label) where value is the ID, and label the name of team
+         */
+        function get_teams_options () {
+        	$args = array( 'post_type' => 'aeris-team', 'posts_per_page' => 200 , 'order' => 'desc');
+        	$teams = new WP_Query( $args );
+        	$values = array();
+        	while($teams->have_posts()) {
+        		$teams->the_post();
+        		array_push($values, array('value' => $teams->post->ID, 'label' =>$teams->post->post_title));
+        	}
+        	echo json_encode($values);
+        	die();
+        }
 
-
+        add_action('wp_ajax_get_teams_options', 'get_teams_options');
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /****************************************************************************************************
         * SHORTCODES
@@ -284,6 +305,7 @@ function aeris_team_manager_plugin_init(){
         			'render_callback' => 'aeris_team_manager_team_shortcode'
         	) );
         }
+ 
         /** ********************************************************************
          * 
          * Show Team Shortcode in admin page
