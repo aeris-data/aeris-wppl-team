@@ -4,54 +4,9 @@
    // var __                = wp.i18n.__; // The __() function for internationalization.
     var createElement     = wp.element.createElement; // The wp.element.createElement() function to create elements.
     var registerBlockType = wp.blocks.registerBlockType; // The registerBlockType() function to register blocks.
-	var aerisTeamOptions = [{ label: 'Informatique', value: '607' },
-		{ label: 'Equipe2', value: '22' }];
-	var withSelect = wp.data.withSelect;
-	/**
-	 * search options
-	 */
-	function aerisSearchTeams (props, callback) {
-		 $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            async: false,
-            url: ajaxurl,
-            data: 'action=get_teams_options',
-            success: function(data) {
-                aerisTeamOptions = data;
-                props.teams = data;
-                callback(props);
-                return data;
-            }
-        });
-		
-	}
-  
-	function createSelectTeam( props) {
-		 var options = [];
-         props.teams.forEach(function (team) {
-         	options.push({label: team.title.raw, value: team.id})
-         })
-         console.log(props);
-			var {attributes , setAttributes, focus, className} = props;
-			console.log(attributes.id);
-			var SelectControl = wp.components.SelectControl;
-			var onSelectTeam = function (v) {
-				return props.setAttributes({
-                 id: v
-             });
-			}
-			return [
-				createElement(
-                 SelectControl,
-                 {
-                     onChange: onSelectTeam,
-                     value: attributes.id,
-                     options: options
-                 }
-				)					
-         ];
-	}
+   if (!aerisTeamOptions) {
+	   var aerisTeamOptions = [];
+   }
 
 	/**
      * Register block
@@ -72,8 +27,37 @@
                     type: 'number'
                 }
             },
+           // edit: props =>  aerisSearchTeams (props, handleSuccess, handleWait),
             // Defines the block within the editor.
-            edit: aerisSearchTeams(props, createSelectTeam)(props),
+            edit: function (props) {
+            	  console.log(props);
+            	if (aerisTeamOptions.length == 0) {
+            		return 'NO TEAM';
+            	}
+      			var {attributes , setAttributes, focus, className} = props;
+      			console.log('attrid='+attributes.id);
+      			if (!attributes.id) {
+      				props.setAttributes({
+      					id: parseInt(aerisTeamOptions[0].value)
+      				})
+      			}
+      			var SelectControl = wp.components.SelectControl;
+      			var onSelectTeam = function (v) {
+      				return props.setAttributes({
+                       id: parseInt(v)
+                   });
+      			}
+      			return [
+      				createElement(
+                       SelectControl,
+                       {
+                           onChange: onSelectTeam,
+                           value: attributes.id,
+                           options: aerisTeamOptions
+                       }
+      				)					
+               ];
+            },
 //            	withSelect( function(select, props) {
 //            	return {
 //                    teams: select( 'core' ).getEntityRecords( 'postType', 'aeris-team' )

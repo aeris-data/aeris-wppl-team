@@ -91,7 +91,11 @@ function aeris_team_manager_plugin_init(){
         			plugins_url('js/team-block.js', __FILE__),
         			array( 'wp-blocks', 'wp-i18n', 'wp-element' )
         			);
-        	wp_localize_script('aeris-team-block-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+        	// write teams list for js script
+        	wp_localize_script( 'aeris-team-block-js', 'aerisTeamOptions', get_teams_options() );
+        	// @todo @epointal pour changer dynamiquement la liste des équipes
+        	// wp_localize_script('aeris-team-block-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+        	
         }
         add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
 
@@ -234,8 +238,8 @@ function aeris_team_manager_plugin_init(){
         add_action( 'after_setup_theme', 'aeris_team_manager_images_setup' );
 //--------------------------------------------------------------------------------------------------------------------------------
       /**
-       * SEARCH TEAMS WITH AJAX
-       ***************************/
+       * SEARCH TEAMS 
+       ***************/
         
         /*
          * Return json array of team
@@ -245,15 +249,19 @@ function aeris_team_manager_plugin_init(){
         	$args = array( 'post_type' => 'aeris-team', 'posts_per_page' => 200 , 'order' => 'desc');
         	$teams = new WP_Query( $args );
         	$values = array();
-        	while($teams->have_posts()) {
-        		$teams->the_post();
-        		array_push($values, array('value' => $teams->post->ID, 'label' =>$teams->post->post_title));
+        	foreach($teams->posts as $post){
+        		
+        		array_push($values, array('value' => $post->ID, 'label' =>$post->post_title));
         	}
-        	echo json_encode($values);
+        	return $values;
+        }
+        // @todo @epointal add ajax uri to get teams list in js script
+        function print_teams_options () {	
+        	echo json_encode(get_teams_options());
         	die();
         }
 
-        add_action('wp_ajax_get_teams_options', 'get_teams_options');
+        add_action('wp_ajax_get_teams_options', 'print_teams_options');
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /****************************************************************************************************
         * SHORTCODES
