@@ -84,6 +84,7 @@ function aeris_team_manager_plugin_init(){
         }
         add_action('wp_enqueue_scripts','aeris_team_manager_scripts');
         
+        // @author epointal
         // LOAD CSS & SCRIPTS FOR GUTENBERG EDITOR
         function gutenberg_enqueue_block_editor_assets() {
         	wp_enqueue_script(
@@ -93,8 +94,6 @@ function aeris_team_manager_plugin_init(){
         			);
         	// write teams list for js script
         	wp_localize_script( 'aeris-team-block-js', 'aerisTeamOptions', get_teams_options() );
-        	// @todo @epointal pour changer dynamiquement la liste des équipes
-        	// wp_localize_script('aeris-team-block-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
         	
         }
         add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
@@ -241,8 +240,8 @@ function aeris_team_manager_plugin_init(){
        * SEARCH TEAMS 
        ***************/
         
-        /*
-         * Return json array of team
+        /* @author epointal
+         * Return  array of teams 
          * ie array of couple (value, label) where value is the ID, and label the name of team
          */
         function get_teams_options () {
@@ -250,18 +249,11 @@ function aeris_team_manager_plugin_init(){
         	$teams = new WP_Query( $args );
         	$values = array();
         	foreach($teams->posts as $post){
-        		
         		array_push($values, array('value' => $post->ID, 'label' =>$post->post_title));
         	}
         	return $values;
         }
-        // @todo @epointal add ajax uri to get teams list in js script
-        function print_teams_options () {	
-        	echo json_encode(get_teams_options());
-        	die();
-        }
-
-        add_action('wp_ajax_get_teams_options', 'print_teams_options');
+  
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /****************************************************************************************************
         * SHORTCODES
@@ -270,6 +262,15 @@ function aeris_team_manager_plugin_init(){
         function aeris_team_manager_register_shortcodes(){
             add_shortcode('aeris_team', 'aeris_team_manager_team_shortcode');
             add_shortcode('aeris_member', 'aeris_team_manager_member_shortcode');
+            
+            // @author epointal
+            // Gutenberg team block like <!-- wp:aeris-wppl-team/team-block {"id":607} /-->
+            // is interpreted like [aeris_team id=607]
+            if (function_exists('register_block_type')) {
+            	register_block_type( 'aeris-wppl-team/team-block', array(
+            			'render_callback' => 'aeris_team_manager_team_shortcode'
+            	) );
+            }
         }
 
         /*************************************************************************
@@ -307,12 +308,7 @@ function aeris_team_manager_plugin_init(){
             return $out;
         }
 
-        // Gutenberg block js/team-block
-        if (function_exists('register_block_type')) {
-        	register_block_type( 'aeris-wppl-team/team-block', array(
-        			'render_callback' => 'aeris_team_manager_team_shortcode'
-        	) );
-        }
+       
  
         /** ********************************************************************
          * 
