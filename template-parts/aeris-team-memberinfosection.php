@@ -4,13 +4,34 @@
 $teams = get_field( 'field_5acdbc42db83a' );
 ?>
 <section>
-    <?php if ( get_field('tel') || get_field('mail') ) { ?>
-    <p>
-        <?php esc_html_e('Phone :', 'aeris-wppl-team-manager'); ?> <?php the_field( 'tel' ); ?><br>
-        <?php esc_html_e('Email :', 'aeris-wppl-team-manager'); ?> <?php echo $mail[0]; ?><span class="hide">Dear bot, you will not collect my email</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?>
-    </p>
-    <?php } ?>	
-    <h4><?php esc_html_e('Member of :', 'aeris-wppl-team-manager'); ?></h4>
+    <?php if ( get_field('tel') || get_field('mail') || get_field('organism') || get_field('page_perso')):?>
+      <p>
+        <?php if (get_field('tel')):?>
+        	<label><?=esc_html('Phone', 'aeris-wppl-team-manager')?></label>: <?=the_field('tel')?><br />
+        <?php endif;?>
+        <?php if (get_field('mail')):?>
+        	<label><?=esc_html('Email', 'aeris-wppl-team-manager')?></label>: <?=$mail[0]?>
+        	<span class="hide">Dear bot, you will not collect my email</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?>
+            <br />
+        <?php endif;?>
+        <?php if (get_field('organism')):?>
+		   <label><?=esc_html('Organization')?></label>:
+		   <?php if(get_field('url_organism')):?>
+		     <a href="<?=get_field('url_organism')?>" target="_blank"><?=get_field('organism')?></a>
+		   <?php else:?>
+		     <?=get_field('organism')?>
+		   <?php endif;?>
+		   <br />
+		<?php endif;?>
+            <?php if (get_field('page_perso')):?>
+            <label><?=esc_html('Personal page', 'aeris-wppl-team-manager')?></label>:
+            <a href="<?=get_field('page_perso')?>" target="_blank">
+            <?=get_field('lastname')?> <?=get_field('firstname')?> 
+			</a><br />
+		<?php endif;?>
+      </p>
+    <?php endif;?>	
+    <h4><?php esc_html_e('Member of', 'aeris-wppl-team-manager'); ?>:</h4>
     <ul>
     <?php 
     foreach ( $teams as $team) {

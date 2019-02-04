@@ -3,95 +3,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Aeris Team Manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 09:28+0000\n"
+"POT-Creation-Date: 2018-11-21 11:50+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
-"Language: \n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: esc_html;esc_html_e;__\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: aeris-team.php:157
-msgid "Add member"
+#: aeris-team.php:118 aeris-team.php:121 inc/acf-config.php:6
+msgid "Team"
 msgstr ""
 
-#: aeris-team.php:123
-msgid "Add team"
-msgstr ""
-
-#. Name of the plugin
-msgid "Aeris Team Manager"
-msgstr ""
-
-#: inc/acf-config.php:34
-msgid "Display"
-msgstr ""
-
-#: aeris-team.php:158
-msgid "Edit member"
-msgstr ""
-
-#: aeris-team.php:124
-msgid "Edit team"
-msgstr ""
-
-#: inc/acf-config.php:171
-msgid "Email"
-msgstr ""
-
-#: template-parts/aeris-team-memberinfosection.php:10
-msgid "Email :"
-msgstr ""
-
-#: inc/acf-config.php:128
-msgid "firstname"
-msgstr ""
-
-#: inc/acf-config.php:10
-msgid "Logo"
-msgstr ""
-
-#: aeris-team.php:156
-msgid "Manage members"
+#: aeris-team.php:120 inc/acf-config.php:268
+msgid "Teams"
 msgstr ""
 
 #: aeris-team.php:122
 msgid "Manage teams"
 msgstr ""
 
-#: aeris-team.php:152 aeris-team.php:155
-msgid "Member"
+#: aeris-team.php:123
+msgid "Add team"
 msgstr ""
 
-#: template-parts/aeris-team-memberinfosection.php:13
-msgid "Member of :"
-msgstr ""
-
-#: aeris-team.php:154 inc/acf-config.php:58
-msgid "Members"
-msgstr ""
-
-#: inc/acf-config.php:109
-msgid "Name"
-msgstr ""
-
-#: aeris-team.php:159
-msgid "New member"
+#: aeris-team.php:124
+msgid "Edit team"
 msgstr ""
 
 #: aeris-team.php:125
 msgid "New team"
 msgstr ""
 
-#: aeris-team.php:162
-msgid "No member found"
+#: aeris-team.php:126
+msgid "See team"
 msgstr ""
 
-#: aeris-team.php:163
-msgid "No member found in trash"
+#: aeris-team.php:127
+msgid "Search team"
 msgstr ""
 
 #: aeris-team.php:128
@@ -102,62 +56,102 @@ msgstr ""
 msgid "No team found in trash"
 msgstr ""
 
-#: template-parts/aeris-team-memberinfosection.php:9
-msgid "Phone :"
+#: aeris-team.php:152 aeris-team.php:155
+msgid "Member"
 msgstr ""
 
-#: inc/acf-config.php:147
-msgid "Photo"
+#: aeris-team.php:154 inc/acf-config.php:58
+msgid "Members"
 msgstr ""
 
-#. Author of the plugin
-msgid "Pierre VERT"
+#: aeris-team.php:156
+msgid "Manage members"
 msgstr ""
 
-#. Description of the plugin
-msgid "Plugin pour gérer les membres et les équipes"
+#: aeris-team.php:157
+msgid "Add member"
 msgstr ""
 
-#: inc/acf-config.php:236
-msgid "Position"
+#: aeris-team.php:158
+msgid "Edit member"
 msgstr ""
 
-#: aeris-team.php:161
-msgid "Search member"
-msgstr ""
-
-#: aeris-team.php:127
-msgid "Search team"
+#: aeris-team.php:159
+msgid "New member"
 msgstr ""
 
 #: aeris-team.php:160
 msgid "See member"
 msgstr ""
 
-#: aeris-team.php:126
-msgid "See team"
+#: aeris-team.php:161
+msgid "Search member"
+msgstr ""
+
+#: aeris-team.php:162
+msgid "No member found"
+msgstr ""
+
+#: aeris-team.php:163
+msgid "No member found in trash"
 msgstr ""
 
 #: aeris-team.php:304 aeris-team.php:394
 msgid "Shortcode integration"
 msgstr ""
 
+#: inc/acf-config.php:10
+msgid "Logo"
+msgstr ""
+
+#: inc/acf-config.php:34
+msgid "Display"
+msgstr ""
+
 #: inc/acf-config.php:46
 msgid "Show the manager first, on an independent line"
 msgstr ""
 
-#: aeris-team.php:118 aeris-team.php:121 inc/acf-config.php:6
-msgid "Team"
-msgstr ""
-
-#: aeris-team.php:120 inc/acf-config.php:208
-msgid "Teams"
-msgstr ""
-
-#: inc/acf-config.php:189
-msgid "Tel"
-msgstr ""
-
 #: inc/acf-config.php:61
 msgid "The 1st member of the list will be considered as manager for the team"
+msgstr ""
+
+#: inc/acf-config.php:109
+msgid "Name"
+msgstr ""
+
+#: inc/acf-config.php:128
+msgid "Firstname"
+msgstr ""
+
+#: inc/acf-config.php:147
+msgid "Photo"
+msgstr ""
+
+#: inc/acf-config.php:171 template-parts/aeris-team-memberinfosection.php:13
+msgid "Email"
+msgstr ""
+
+#: inc/acf-config.php:189 template-parts/aeris-team-memberinfosection.php:10
+msgid "Phone"
+msgstr ""
+
+#: inc/acf-config.php:209 template-parts/aeris-team-memberinfosection.php:18
+msgid "Organization"
+msgstr ""
+
+#: inc/acf-config.php:228
+msgid "Organization url"
+msgstr ""
+
+#: inc/acf-config.php:296
+msgid "Position / Fonction"
+msgstr ""
+
+#: template-parts/aeris-team-memberinfosection.php:27
+msgid "Personal page"
+msgstr ""
+
+#: template-parts/aeris-team-memberinfosection.php:34
+msgid "Member of"
 msgstr ""
