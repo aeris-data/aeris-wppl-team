@@ -210,6 +210,22 @@ input[id^="aeris_team_manager_member_info"]:not(:checked) ~ header > div > p {
 .aeris_team_manager_shortcode_team_display > article > section.wrapper-content .aeris_team_manager_membersEmbed {
     flex: 0 1 300px;
 }
+
+/** 
+* AERIS DARK OR LIGHT THEME
+*/
+
+[data-themeambiance="lightTheme"] main > article.aeris_team_manager_memberSingle {
+    background:transparent;
+}
+[data-themeambiance="lightTheme"] main > article.aeris_team_manager_memberSingle > section {
+    background:rgba(255,255,255,.9);
+}
+
+[data-themeambiance="darkTheme"] input[id^="aeris_team_manager_member_info"]:not(:checked) ~ header > div > p {
+    color:#AAA;
+}
+
 /**
 * Helpers
 */

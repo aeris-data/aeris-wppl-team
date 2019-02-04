@@ -5,8 +5,8 @@
 * Description: Plugin pour gérer les membres et les équipes
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
-* Author: Pierre VERT
-* Version: 1.0.0
+* Author: Pierre VERT & Elisabeth Pointal
+* Version: 1.1.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
 * GitHub Branch:     master
 */
@@ -357,7 +357,7 @@ function aeris_team_manager_plugin_init(){
          * 4 . Render meta box content for CPT aeris-team
          */
         function aeris_team_manager_team_shortcode_metabox_callback($post) {
-            echo '<p style="font-size:1.5rem;color:#4765a0;"><strong>[aeris_team id="' . $post->ID . '"]</strong></p>';
+            echo '<p style="font-size:1.5rem;color:#4765a0;">[aeris_team id="' . $post->ID . '"]</p>';
         }
 
 
@@ -447,7 +447,7 @@ function aeris_team_manager_plugin_init(){
          * 4 . Render meta box content for CPT aeris-member
          */
         function aeris_team_manager_member_shortcode_metabox_callback($post) {
-            echo '<p style="font-size:1.3rem;color:#4765a0;"><strong>[aeris_member id="' . $post->ID . '"]</strong></p>';
+            echo '<p style="font-size:1.3rem;color:#4765a0;">[aeris_member id="' . $post->ID . '"]</p>';
         }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------    
@@ -480,7 +480,6 @@ function aeris_team_manager_plugin_init(){
                     background:#EEE;
                     color:<?php echo $code_color;?>;
                 }
-
             </style>
             <?php
         }
