@@ -5,8 +5,8 @@
 * Description: Plugin pour gérer les membres et les équipes
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
-* Author: Pierre VERT
-* Version: 1.0.0
+* Author: Pierre VERT & Elisabeth Pointal
+* Version: 1.1.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
 * GitHub Branch:     master
 */
@@ -66,19 +66,37 @@ function aeris_team_manager_plugin_init(){
             load_textdomain( $domain, trailingslashit( WP_LANG_DIR ) . $domain . '/' . $domain . '-' . $locale . '.mo' );
             // wp-content/plugins/plugin-name/languages/plugin-name-fr_FR.mo
             load_plugin_textdomain( $domain, FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
+           
         }
         add_action( 'init', 'aeris_team_manager_load_plugin_textdomain' );
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         // LOAD ACF CONFIG FILE & custom functions for ACF
-        require_once 'inc/acf-config.php';
+        function load_acf_config() {
+           require_once 'inc/acf-config.php';
+        }
+        add_action('init', 'load_acf_config');
 
-        // LOAD CSS & SCRIPTS
+        // LOAD CSS & SCRIPTS 
         function aeris_team_manager_scripts() {
             wp_register_style( 'prefix-style', plugins_url('css/aeris-team-manager.css', __FILE__) );
             wp_enqueue_style( 'prefix-style' );
         }
         add_action('wp_enqueue_scripts','aeris_team_manager_scripts');
+        
+        // @author epointal
+        // LOAD CSS & SCRIPTS FOR GUTENBERG EDITOR
+        function gutenberg_enqueue_block_editor_assets() {
+        	wp_enqueue_script(
+        			'aeris-team-block-js', // Unique handle.
+        			plugins_url('js/team-block.js', __FILE__),
+        			array( 'wp-blocks', 'wp-i18n', 'wp-element' )
+        			);
+        	// write teams list for js script
+        	wp_localize_script( 'aeris-team-block-js', 'aerisTeamOptions', get_teams_options() );
+        	
+        }
+        add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /**
@@ -217,8 +235,25 @@ function aeris_team_manager_plugin_init(){
 
         }
         add_action( 'after_setup_theme', 'aeris_team_manager_images_setup' );
-
-
+//--------------------------------------------------------------------------------------------------------------------------------
+      /**
+       * SEARCH TEAMS 
+       ***************/
+        
+        /* @author epointal
+         * Return  array of teams 
+         * ie array of couple (value, label) where value is the ID, and label the name of team
+         */
+        function get_teams_options () {
+        	$args = array( 'post_type' => 'aeris-team', 'posts_per_page' => 200 , 'order' => 'desc');
+        	$teams = new WP_Query( $args );
+        	$values = array();
+        	foreach($teams->posts as $post){
+        		array_push($values, array('value' => $post->ID, 'label' =>$post->post_title));
+        	}
+        	return $values;
+        }
+  
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /****************************************************************************************************
         * SHORTCODES
@@ -227,6 +262,15 @@ function aeris_team_manager_plugin_init(){
         function aeris_team_manager_register_shortcodes(){
             add_shortcode('aeris_team', 'aeris_team_manager_team_shortcode');
             add_shortcode('aeris_member', 'aeris_team_manager_member_shortcode');
+            
+            // @author epointal
+            // Gutenberg team block like <!-- wp:aeris-wppl-team/team-block {"id":607} /-->
+            // is interpreted like [aeris_team id=607]
+            if (function_exists('register_block_type')) {
+            	register_block_type( 'aeris-wppl-team/team-block', array(
+            			'render_callback' => 'aeris_team_manager_team_shortcode'
+            	) );
+            }
         }
 
         /*************************************************************************
@@ -264,6 +308,8 @@ function aeris_team_manager_plugin_init(){
             return $out;
         }
 
+       
+ 
         /** ********************************************************************
          * 
          * Show Team Shortcode in admin page
@@ -311,7 +357,7 @@ function aeris_team_manager_plugin_init(){
          * 4 . Render meta box content for CPT aeris-team
          */
         function aeris_team_manager_team_shortcode_metabox_callback($post) {
-            echo '<p style="font-size:1.5rem;color:#4765a0;"><strong>[aeris_team id="' . $post->ID . '"]</strong></p>';
+            echo '<p style="font-size:1.5rem;color:#4765a0;">[aeris_team id="' . $post->ID . '"]</p>';
         }
 
 
@@ -401,7 +447,7 @@ function aeris_team_manager_plugin_init(){
          * 4 . Render meta box content for CPT aeris-member
          */
         function aeris_team_manager_member_shortcode_metabox_callback($post) {
-            echo '<p style="font-size:1.3rem;color:#4765a0;"><strong>[aeris_member id="' . $post->ID . '"]</strong></p>';
+            echo '<p style="font-size:1.3rem;color:#4765a0;">[aeris_member id="' . $post->ID . '"]</p>';
         }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------    
@@ -434,7 +480,6 @@ function aeris_team_manager_plugin_init(){
                     background:#EEE;
                     color:<?php echo $code_color;?>;
                 }
-
             </style>
             <?php
         }
