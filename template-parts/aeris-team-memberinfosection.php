@@ -7,31 +7,36 @@ $teams = get_field( 'field_5acdbc42db83a' );
     <?php if ( get_field('tel') || get_field('mail') || get_field('organism') || get_field('page_perso')):?>
       <p>
         <?php if (get_field('tel')):?>
-        	<label><?=esc_html('Phone', 'aeris-wppl-team-manager')?></label>: <?=the_field('tel')?><br />
+        	<span property="telephone"><?php echo __('Phone', 'aeris-wppl-team-manager')?></span>: <?php echo the_field('tel')?><br>
         <?php endif;?>
+
         <?php if (get_field('mail')):?>
-        	<label><?=esc_html('Email', 'aeris-wppl-team-manager')?></label>: <?=$mail[0]?>
-        	<span class="hide">Dear bot, you will not collect my email</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?>
-            <br />
+        	<span property="email"><span><?php echo __('Email', 'aeris-wppl-team-manager')?></span>: <?php echo $mail[0]?>
+        	<span class="hide">Dear bot, you will not collect my email</span>@<span class="hide">No,No,No</span><?php echo $mail[1]; ?></span>
+            <br>
         <?php endif;?>
+
         <?php if (get_field('organism')):?>
-		   <label><?=esc_html('Organization')?></label>:
-		   <?php if(get_field('url_organism')):?>
-		     <a href="<?=get_field('url_organism')?>" target="_blank"><?=get_field('organism')?></a>
-		   <?php else:?>
-		     <?=get_field('organism')?>
-		   <?php endif;?>
-		   <br />
-		<?php endif;?>
-            <?php if (get_field('page_perso')):?>
-            <label><?=esc_html('Personal page', 'aeris-wppl-team-manager')?></label>:
-            <a href="<?=get_field('page_perso')?>" target="_blank">
-            <?=get_field('lastname')?> <?=get_field('firstname')?> 
-			</a><br />
-		<?php endif;?>
+          <span property="organization"><?php echo __('Organization', 'aeris-wppl-team-manager')?>:
+          <?php if(get_field('url_organism')):?>
+            <a href="<?php echo the_field('url_organism')?>" target="_blank"><?php echo the_field('organism')?></a>
+          <?php else:?>
+            <?php echo the_field('organism')?>
+          <?php endif;?>
+          </span><br>
+        <?php endif;?>
+
+        <?php if (get_field('page_perso')):?>
+            <span property="url">
+              <a href="<?php echo the_field('page_perso')?>" target="_blank">
+                <?php echo __('Personal page', 'aeris-wppl-team-manager')?>
+              </a>
+            </span>
+            <br>
+		    <?php endif;?>
       </p>
     <?php endif;?>	
-    <h4><?php esc_html_e('Member of', 'aeris-wppl-team-manager'); ?>:</h4>
+    <h4><?php echo __('Member of', 'aeris-wppl-team-manager'); ?>:</h4>
     <ul>
     <?php 
     foreach ( $teams as $team) {

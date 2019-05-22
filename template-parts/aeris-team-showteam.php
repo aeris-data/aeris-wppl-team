@@ -29,7 +29,7 @@
         $members = get_field( 'field_5acdbb70a7637' ); 
         ?>
         <?php if ( $members ): 
-                $i=0;	
+                $i=aeris_team_manager_randomID();	
             ?>
         <section class="aeris_team_manager_listMembers">
             <?php foreach ( $members as $post ):  ?>
@@ -42,7 +42,7 @@
                 <?php if (($i === 0) && ( $showmetheboss_array )){?>							
                 <div>
                 <?php }	?>
-                    <article class="aeris_team_manager_membersEmbed">
+                    <article class="aeris_team_manager_membersEmbed" vocab="http://schema.org/" typeof="Person">
                         <input type="checkbox" name="aeris_team_manager_member_info<?php echo $i;?>" id="aeris_team_manager_member_info<?php echo $i;?>">
                         <header title="Click on arrow to show contact informations">
                         <?php 
@@ -56,7 +56,7 @@
                             <?php echo wp_get_attachment_image( $image, $size );?>
                             <?php } else {
                             ?>
-                                <img src="<?php echo plugin_dir_url ( __DIR__ ) . 'images/user.svg';  ?>" alt="">
+                                <img src="<?php echo plugin_dir_url ( __DIR__ ) . 'images/user.svg';  ?>" alt="photo" property="image">
                             <?php	
                             } 
                             ?>
@@ -64,9 +64,9 @@
                         
                             <div>
                                 <h3>
-                                    <span class="aeris_team_manager_uppercase"><?php the_field( 'lastname' );?></span> <?php the_field( 'firstname' ); ?>
+                                    <span class="aeris_team_manager_uppercase" property="name"><?php the_field( 'lastname' );?></span> <?php the_field( 'firstname' ); ?>
                                 </h3>
-                                <p>
+                                <p property="jobTitle">
                                 <?php the_field( 'fonction' ); ?>
                                 </p>
                             </div>
