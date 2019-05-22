@@ -26,3 +26,13 @@ function aeris_team_manager_show_categories($categories) {
 <?php
     } 
 }
+
+/**
+ * RANDOM ID
+ * génère un random pour pouvoir afficher plusieurs équipes en shortcode dans une page
+ */
+
+function aeris_team_manager_randomID() {
+    $out=rand(0,99999);
+    return $out;
+}
