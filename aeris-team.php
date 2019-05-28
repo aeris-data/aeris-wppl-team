@@ -1,13 +1,13 @@
 <?php 
 /**
 * Plugin Name: Aeris Team Manager
-* Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
+* Plugin URI : https://github.com/aeris-data/aeris-wppl-team
 * Description: Plugin pour gérer les membres et les équipes
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
 * Author: Pierre VERT & Elisabeth Pointal
-* Version: 1.1.1
-* GitHub Plugin URI: aeris-data/aeris-wppl-team-manager
+* Version: 1.1.2
+* GitHub Plugin URI: aeris-data/aeris-wppl-team
 * GitHub Branch:     master
 */
 
