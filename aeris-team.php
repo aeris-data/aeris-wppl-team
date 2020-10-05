@@ -6,7 +6,7 @@
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
 * Author: Pierre VERT & Elisabeth Pointal
-* Version: 1.1.2
+* Version: 1.2.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team
 * GitHub Branch:     master
 */
@@ -86,7 +86,7 @@ function aeris_team_manager_plugin_init(){
         
         // @author epointal
         // LOAD CSS & SCRIPTS FOR GUTENBERG EDITOR
-        function gutenberg_enqueue_block_editor_assets() {
+        function aeris_team_gutenberg_enqueue_block_editor_assets() {
         	wp_enqueue_script(
         			'aeris-team-block-js', // Unique handle.
         			plugins_url('js/team-block.js', __FILE__),
@@ -96,7 +96,7 @@ function aeris_team_manager_plugin_init(){
         	wp_localize_script( 'aeris-team-block-js', 'aerisTeamOptions', get_teams_options() );
         	
         }
-        add_action( 'enqueue_block_editor_assets', 'gutenberg_enqueue_block_editor_assets');
+        add_action( 'enqueue_block_editor_assets', 'aeris_team_gutenberg_enqueue_block_editor_assets');
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------
         /**
