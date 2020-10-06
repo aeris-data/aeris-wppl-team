@@ -18,6 +18,10 @@
     margin:0 auto;
 }
 
+.single-aeris-team .aeris_team_manager_wrapper main > article > header > figure {
+    text-align: center;
+}
+
 .aeris_team_manager_listMembers {
     display: flex;
     flex-flow: row wrap;
