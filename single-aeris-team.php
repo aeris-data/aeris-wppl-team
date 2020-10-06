@@ -9,8 +9,6 @@
 
 get_header(); 
 
-// $categories = get_the_terms( $post->ID, 'sedoo-type-document');  
-
 while ( have_posts() ) : the_post();
 
 	get_template_part( 'template-parts/header-content', 'page' );
