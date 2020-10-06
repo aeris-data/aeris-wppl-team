@@ -22,7 +22,7 @@
     }
     ?>
     	
-    <section class="wrapper-content">
+    <section class="alignwide">
         <?php 
         $showmetheboss_array = get_field( 'showmetheboss' ); 
         // !! Bidirectional field, use field_key, not field_name !!
