@@ -6,7 +6,7 @@
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
 * Author: Pierre VERT & Elisabeth Pointal
-* Version: 1.3.0
+* Version: 1.3.1
 * GitHub Plugin URI: aeris-data/aeris-wppl-team
 * GitHub Branch:     master
 */

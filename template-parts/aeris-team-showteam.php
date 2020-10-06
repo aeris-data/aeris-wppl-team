@@ -1,7 +1,18 @@
+<?php
+$themeName = wp_get_theme();
+?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 									
     <header>
-    <?php $logo = get_field( 'logo' ); ?>
+        <?php 
+        if ($themeName->get('TextDomain') !== "aeris-wordpress-theme") {
+        ?>
+            <h1><?php the_title(); ?></h1>
+        <?php           
+        }
+        ?>
+        
+        <?php $logo = get_field( 'logo' ); ?>
         
         <figure>
         <?php if ( $logo ) { ?>
