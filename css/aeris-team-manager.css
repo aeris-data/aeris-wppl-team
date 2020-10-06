@@ -1,7 +1,6 @@
 /**
 * CSS FOR AERIS TEAM MANAGER PLUGIN
-* author : pVert
-* Plugin URI : https://github.com/sedoo/sedoo-wppl-docmanager
+* author : Pierre VERT , SEDOO
 */
 
 .single-aeris-member .aeris_team_manager_wrapper {
@@ -17,6 +16,10 @@
 
 .aeris_team_manager_wrapper {
     margin:0 auto;
+}
+
+.single-aeris-team .aeris_team_manager_wrapper main > article > header > figure {
+    text-align: center;
 }
 
 .aeris_team_manager_listMembers {
@@ -52,6 +55,7 @@
 .aeris_team_manager_membersEmbed > * {
     display: flex;
     flex-flow: row wrap;
+    align-items: center;
     transition: all .4s ease;
 }
 
@@ -80,9 +84,10 @@
     height:200px;
 }
 
-.aeris_team_manager_membersEmbed > header > div {
+.single article.aeris_team_manager_memberSingle > header > div,
+.single article.aeris_team_manager_membersEmbed > header > div {
     flex:1;
-    padding-top:8px;
+    border:none;
 }
 
 .aeris_team_manager_membersEmbed > header > div > h3 {
@@ -143,8 +148,10 @@ input[id^="aeris_team_manager_member_info"]:checked ~ header label[for^="aeris_t
     content:"-";
 } 
 
-input[id^="aeris_team_manager_member_info"]:checked ~ header {
+.single input[id^="aeris_team_manager_member_info"]:checked ~ header,
+.single .aeris_team_manager_memberSingle > header {
     display:block;
+    margin-bottom:0;
 }
 
 input[id^="aeris_team_manager_member_info"]:checked ~ header,
@@ -157,6 +164,7 @@ input[id^="aeris_team_manager_member_info"]:checked ~ header,
 
 input[id^="aeris_team_manager_member_info"]:checked ~ header > div > h3,
 .aeris_team_manager_memberSingle > header > div > h3,
+.aeris_team_manager_memberSingle > header > figure,
 [class^="aeris_team_manager_member"] > header > div > p
  {
     text-align: center;
@@ -172,6 +180,7 @@ input[id^="aeris_team_manager_member_info"]:checked ~ header > div > h3
 input[id^="aeris_team_manager_member_info"]:checked ~  header > figure {
     margin:0 auto;
     padding-right: 0;
+    text-align: center;
 }
 
 input[id^="aeris_team_manager_member_info"]:checked ~  section > h4 {
@@ -197,7 +206,7 @@ input[id^="aeris_team_manager_member_info"]:checked ~  section > ul,
 }
 
 input[id^="aeris_team_manager_member_info"]:not(:checked) ~ header > div > p {
-    text-align:justify;
+    text-align:left;
     color:#333;
 }
 

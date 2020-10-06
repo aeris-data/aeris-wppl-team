@@ -6,7 +6,7 @@
 * Text Domain: aeris-wppl-team-manager
 * Domain Path: /languages
 * Author: Pierre VERT & Elisabeth Pointal
-* Version: 1.2.0
+* Version: 1.3.0
 * GitHub Plugin URI: aeris-data/aeris-wppl-team
 * GitHub Branch:     master
 */
@@ -456,21 +456,38 @@ function aeris_team_manager_plugin_init(){
         * Custom CSS FOR AERIS THEME
         */     
         function aeris_team_manager_customCSS() {
+            ?>
+            <style>
+            <?php
 
+            // if theme Aeris 
             if (get_theme_mod('theme_aeris_main_color') == "custom" ) {
                 $code_color = get_theme_mod( 'theme_aeris_color_code' );
+                ?>
+                :root {
+                    --theme-color:<?php echo $code_color;?>;
+                    --hover-text-color:<?php echo $hover_text_color;?>;
+                }
+                <?php 
             }
             else {
                 $code_color	= get_theme_mod( 'theme_aeris_main_color' );
+                ?>
+                :root {
+                    --theme-color:<?php echo $code_color;?>;
+                    --hover-text-color:<?php echo $hover_text_color;?>;
+                }
+                <?php
             }
             ?>
-            <style>
+                
+            
                 input[id^="aeris_team_manager_member_info"]:checked ~ header,
                 .aeris_team_manager_memberSingle > header {
-                    background: <?php echo $code_color;?> ;
+                    background: var(--theme-color);
                 }
                 label[for^="aeris_team_manager_member_info"] { 
-                    background: <?php echo $code_color;?>;
+                    background: var(--theme-color);
                     color:#FFF;
                 }
                 .aeris_team_manager_membersEmbed > header:hover label[for^="aeris_team_manager_member_info"] {
@@ -479,7 +496,7 @@ function aeris_team_manager_plugin_init(){
 
                 input[id^="aeris_team_manager_member_info"]:checked ~ header label {
                     background:#EEE;
-                    color:<?php echo $code_color;?>;
+                    color:var(--theme-color);
                 }
             </style>
             <?php
