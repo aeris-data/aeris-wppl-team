@@ -37,12 +37,13 @@ $teams = get_field( 'field_5acdbc42db83a' );
       </p>
     <?php endif;?>	
     <h4><?php echo __('Member of', 'aeris-wppl-team-manager'); ?>:</h4>
+    
     <ul>
     <?php 
     foreach ( $teams as $team) {
-    ?>	
+    ?>	<?php var_dump($team);?>
         <li>
-            <a href="<?php echo $team -> guid;?>" title="<?php echo $team -> post_title;?>">
+            <a href="<?php echo esc_url( get_permalink($team -> ID) );?>" title="<?php echo $team -> post_title;?>">
             <?php echo $team -> post_title;?></a>
         </li>
     <?php
