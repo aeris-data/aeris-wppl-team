@@ -12,7 +12,9 @@ get_header();
 
 while ( have_posts() ) : the_post();
 
+	if ($themeName->TextDomain !== "aeris-wordpress-theme") {
 	get_template_part( 'template-parts/header-content', 'page' );
+	}
 ?>
 
 	<div id="content-area" class="aeris_team_manager_wrapper">
