@@ -18,7 +18,8 @@
     margin:0 auto;
 }
 
-.single-aeris-team .aeris_team_manager_wrapper main > article > header > figure {
+.single-aeris-team .aeris_team_manager_wrapper main > article > header > figure,
+.aeris_team_manager_shortcode_team_display > article > header > figure {
     text-align: center;
 }
 
@@ -43,7 +44,9 @@
 .aeris_team_manager_listMembers > div:first-child > .aeris_team_manager_membersEmbed {
     margin-right: 0;
 }
-
+.aeris_team_manager_listMembers > .aeris_team_manager_membersEmbed > header{
+    margin-bottom: 0;
+}
 
 [class^="aeris_team_manager_member"]  {
     flex:0 1 360px;
@@ -78,6 +81,7 @@
     height: 100px;
     border:1px solid #FFF;
     border-radius: 50%;
+    object-fit: cover;
 }
 .aeris_team_manager_memberSingle > header > figure > img {
     width: 200px;
@@ -98,7 +102,7 @@
 .aeris_team_manager_membersEmbed > section > p,
 .aeris_team_manager_membersEmbed > section > ul
  {
-    font-size:.9rem;
+    font-size:.875rem;
 }
 
 [class^="aeris_team_manager_member"] > section {
@@ -137,6 +141,7 @@ input[id^="aeris_team_manager_member_info"] {
 }
 input[id^="aeris_team_manager_member_info"]:checked ~ section {
     display: block;
+    animation: slide_in_top .4s linear 1 alternate;
 }
 input[id^="aeris_team_manager_member_info"]:checked ~ header label,
 .aeris_team_manager_membersEmbed > header:hover label[for^="aeris_team_manager_member_info"]  {
@@ -148,7 +153,7 @@ input[id^="aeris_team_manager_member_info"]:checked ~ header label[for^="aeris_t
     content:"-";
 } 
 
-.single input[id^="aeris_team_manager_member_info"]:checked ~ header,
+input[id^="aeris_team_manager_member_info"]:checked ~ header,
 .single .aeris_team_manager_memberSingle > header {
     display:block;
     margin-bottom:0;
@@ -241,4 +246,20 @@ input[id^="aeris_team_manager_member_info"]:not(:checked) ~ header > div > p {
 
 .hide {
     display: none;
+}
+
+/******/
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header,
+.aeris_team_manager_memberSingle > header {
+    background: var(--theme-color);
+}
+label[for^="aeris_team_manager_member_info"] { 
+    background: var(--theme-color);
+    color:#FFF;
+}
+
+input[id^="aeris_team_manager_member_info"]:checked ~ header label {
+    background:#EEE;
+    color:var(--theme-color);
 }
