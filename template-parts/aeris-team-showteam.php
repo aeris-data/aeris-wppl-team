@@ -4,14 +4,7 @@ $themeName = wp_get_theme();
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 									
     <header>
-        <?php 
-        if ($themeName->get('TextDomain') !== "aeris-wordpress-theme") {
-        ?>
-            <h1><?php the_title(); ?></h1>
-        <?php           
-        }
-        ?>
-        
+       
         <?php $logo = get_field( 'logo' ); ?>
         
         <figure>
@@ -53,7 +46,7 @@ $themeName = wp_get_theme();
                 <?php if (($i === 0) && ( $showmetheboss_array )){?>							
                 <div>
                 <?php }	?>
-                    <article class="aeris_team_manager_membersEmbed" vocab="http://schema.org/" typeof="Person">
+                    <article class="aeris_team_manager_membersEmbed slide-in-left delay-display" vocab="http://schema.org/" typeof="Person">
                         <input type="checkbox" name="aeris_team_manager_member_info<?php echo $i;?>" id="aeris_team_manager_member_info<?php echo $i;?>">
                         <header title="Click on arrow to show contact informations">
                         <?php 
